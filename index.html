@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaranTe v6.17 - Sistema de Gestión de Restaurante</title>
+    <title>TaranTe v6.18 - Sistema de Gestión de Restaurante</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -11,7 +11,7 @@
     
     <!-- Firebase Configuration -->
     <script>
-        const APP_VERSION = '6.17';
+        const APP_VERSION = '6.18';
         const firebaseConfig = {
             apiKey: "AIzaSyAEB1xiIH_wUolK8NAJcklIfRV33QoBDuM",
             authDomain: "fenix-restaurant.firebaseapp.com",
@@ -964,28 +964,27 @@
             <!-- Selector de Día -->
             <div class="panel-section">
                 <h3>📅 Seleccionar Día</h3>
-                <div class="tabs">
-                    <button class="tab active" onclick="seleccionarDia('lunes', this)">Lunes</button>
-                    <button class="tab" onclick="seleccionarDia('martes', this)">Martes</button>
-                    <button class="tab" onclick="seleccionarDia('miercoles', this)">Miércoles</button>
-                    <button class="tab" onclick="seleccionarDia('jueves', this)">Jueves</button>
-                    <button class="tab" onclick="seleccionarDia('viernes', this)">Viernes</button>
-                    <button class="tab" onclick="seleccionarDia('sabado', this)">Sábado</button>
-                    <button class="tab" onclick="seleccionarDia('domingo', this)">Domingo</button>
+                <div class="tabs" style="overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 5px;">
+                    <button class="tab active" onclick="seleccionarDia('lunes', this)">Lun</button>
+                    <button class="tab" onclick="seleccionarDia('martes', this)">Mar</button>
+                    <button class="tab" onclick="seleccionarDia('miercoles', this)">Mié</button>
+                    <button class="tab" onclick="seleccionarDia('jueves', this)">Jue</button>
+                    <button class="tab" onclick="seleccionarDia('viernes', this)">Vie</button>
+                    <button class="tab" onclick="seleccionarDia('sabado', this)">Sáb</button>
+                    <button class="tab" onclick="seleccionarDia('domingo', this)">Dom</button>
                 </div>
             </div>
 
             <!-- Vista de Items del Día -->
-            <div id="vistaItemsDia" class="panel-section">
-                <h3 id="tituloItems">Items del Menú - Lunes</h3>
-                <div id="itemsMenuDia">
-                    <!-- Los items se mostrarán aquí -->
+            <div id="vistaItemsDia">
+                <div id="itemsMenuDia" class="grid grid-1">
+                    <!-- Los items se mostrarán aquí con un diseño optimizado para móvil -->
                 </div>
             </div>
             
             <div class="panel-section">
-                <h3>🧾 Resumen Bebidas y Extras (Fijo)</h3>
-                <div class="grid grid-2">
+                <h3>🧾 Bebidas y Extras</h3>
+                <div class="grid grid-2" id="gridMenuFijo">
                     <div class="panel">
                         <div class="panel-header">🥤 Bebidas</div>
                         <div class="panel-body" id="resumenBebidasFijas">
@@ -2451,49 +2450,40 @@
 
         // Configurar acceso a funcionalidades según permisos
         function configurarAccesoPorPermisos() {
-            // Ocultar/mostrar elementos según permisos
-            const elementos = {
-                'li[data-view="dashboard"]': tienePermiso('verDashboard'),
-                'li[data-view="comandas"]': tienePermiso('verComandas'),
-                'li[data-view="cocina"]': tienePermiso('verCocina'),
-                'li[data-view="cuentas"]': tienePermiso('verCuentas'),
-                'li[data-view="menu"]': tienePermiso('verMenu'),
-                'li[data-view="informes"]': tienePermiso('verInformes')
-            };
-            
-            Object.entries(elementos).forEach(([selector, tieneAcceso]) => {
-                const elemento = document.querySelector(selector);
-                if (elemento) {
-                    elemento.style.display = tieneAcceso ? 'block' : 'none';
+            if (!currentUser) return;
+
+            // Ocultar/mostrar elementos del nav según permisos
+            const vistas = ['dashboard', 'comandas', 'cocina', 'cuentas', 'menu', 'informes', 'configuracion'];
+            vistas.forEach(v => {
+                const item = document.querySelector(`li[data-view="${v}"]`);
+                const permiso = v === 'configuracion' ? 'gestionarConfiguracion' : `ver${v.charAt(0).toUpperCase() + v.slice(1)}`;
+                if (item) {
+                    item.style.display = tienePermiso(permiso) ? 'flex' : 'none';
                 }
             });
             
-            const ventasPanel = document.getElementById('panelVentasDia');
-            if (ventasPanel) {
-                ventasPanel.style.display = (currentUser && currentUser.role === 'admin') ? 'block' : 'none';
-            }
-            
             const panelMenuAdmin = document.getElementById('panelMenuAdmin');
             if (panelMenuAdmin) {
-                panelMenuAdmin.style.display = (currentUser && currentUser.role === 'admin') ? 'block' : 'none';
+                panelMenuAdmin.style.display = (currentUser.role === 'admin') ? 'block' : 'none';
             }
             
             // Limitar Configuración para mesero y cocinera
-            const panelTemas = document.getElementById('panelTemas')?.closest('.panel-section');
-            const panelSonidos = document.getElementById('panelSonidos')?.closest('.panel-section');
             const panelHistorial = document.getElementById('panelHistorialDatos');
-            const panelInfoUsuario = document.getElementById('infoUsuarioActual')?.closest('.panel-section');
             const permisosSection = document.getElementById('panelPermisosSection');
-            if (currentUser && currentUser.role !== 'admin') {
-                if (panelTemas) panelTemas.style.display = 'block';
-                if (panelSonidos) panelSonidos.style.display = 'block';
+            if (currentUser.role !== 'admin') {
                 if (panelHistorial) panelHistorial.style.display = 'none';
-                if (panelInfoUsuario) panelInfoUsuario.style.display = 'none';
                 if (permisosSection) permisosSection.style.display = 'none';
             } else {
-                if (panelTemas) panelTemas.style.display = 'block';
-                if (panelSonidos) panelSonidos.style.display = 'block';
                 if (panelHistorial) panelHistorial.style.display = 'block';
+                if (permisosSection) permisosSection.style.display = 'block';
+            }
+
+            // Elementos en la pestaña Menú para consulta del mesero
+            const vistaItemsDia = document.getElementById('vistaItemsDia');
+            const gridMenuFijo = document.getElementById('gridMenuFijo');
+            if (currentUser.role === 'mesero') {
+                if (vistaItemsDia) vistaItemsDia.style.display = 'block';
+                if (gridMenuFijo) gridMenuFijo.style.display = 'grid';
             }
             
             // Si la vista activa no está permitida, cambiar a la primera permitida
@@ -3719,12 +3709,10 @@
 
         function actualizarVistaDia(dia) {
             const titulo = document.getElementById('tituloDia');
-            const tituloItems = document.getElementById('tituloItems');
             const itemsDiv = document.getElementById('itemsMenuDia');
             const itemsAdminDiv = document.getElementById('itemsAdminDia');
             
             if (titulo) titulo.textContent = `Configuración del Menú - ${dia.charAt(0).toUpperCase() + dia.slice(1)}`;
-            if (tituloItems) tituloItems.textContent = `Items del Menú - ${dia.charAt(0).toUpperCase() + dia.slice(1)}`;
             
             if (!itemsDiv && !itemsAdminDiv) return;
             
@@ -3734,11 +3722,14 @@
             
             ['desayuno', 'almuerzo', 'cena'].forEach(categoria => {
                 const itemsCategoria = items[categoria];
+                
+                // Diseño optimizado para móviles (Cards compactas)
                 html += `
-                    <div class="panel" style="margin-bottom: 15px;">
-                        <div class="panel-header" style="text-transform: capitalize;">${categoria}</div>
-                        <div class="panel-body">
+                    <div class="panel-section" style="padding: 1rem; margin-bottom: 1rem;">
+                        <h4 style="text-transform: capitalize; margin-bottom: 10px; border-bottom: 2px solid var(--primary-color); display: inline-block;">${categoria}</h4>
+                        <div class="grid grid-2" style="gap: 10px;">
                 `;
+
                 htmlAdmin += `
                     <div class="panel" style="margin-bottom: 15px;">
                         <div class="panel-header" style="text-transform: capitalize;">${categoria}</div>
@@ -3746,22 +3737,21 @@
                 `;
                 
                 if (itemsCategoria.length === 0) {
-                    html += '<p style="color: var(--neutral-600); font-style: italic;">No hay items en esta categoría</p>';
-                    htmlAdmin += '<p style="color: var(--neutral-600); font-style: italic;">No hay items en esta categoría</p>';
+                    html += '<p style="color: var(--neutral-600); font-style: italic; grid-column: 1/-1;">No hay items</p>';
+                    htmlAdmin += '<p style="color: var(--neutral-600); font-style: italic;">No hay items</p>';
                 } else {
-                    html += '<div style="max-height: 200px; overflow-y: auto;">';
-                    htmlAdmin += '<div style="max-height: 200px; overflow-y: auto;">';
                     itemsCategoria.forEach((item, index) => {
+                        // Card compacta para móvil
                         html += `
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--neutral-200);">
-                                <div>
-                                    <strong>${item.nombre}</strong>
-                                    <br><small style="color: var(--neutral-600);">
-                                        💰 S/.${item.precio.toFixed(2)} | 🏷️ ${item.subcategoria} | 📦 Stock: ${item.stock}
-                                    </small>
+                            <div style="background: var(--bg-tertiary); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
+                                <div style="font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; line-height: 1.2;">${item.nombre}</div>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto;">
+                                    <div style="color: var(--primary-color); font-weight: 700; font-size: 0.9rem;">S/.${item.precio.toFixed(2)}</div>
+                                    <div style="font-size: 0.75rem; background: var(--neutral-200); padding: 1px 5px; border-radius: 4px; color: var(--neutral-700);">Stock: ${item.stock}</div>
                                 </div>
                             </div>
                         `;
+                        
                         htmlAdmin += `
                             <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--neutral-200);">
                                 <div>
@@ -3774,8 +3764,6 @@
                             </div>
                         `;
                     });
-                    html += '</div>';
-                    htmlAdmin += '</div>';
                 }
                 
                 html += '</div></div>';
@@ -3861,55 +3849,69 @@
         }
         
         function renderMenuFijoListados() {
-            const bebidasDiv = document.getElementById('listadoBebidasFijas');
-            const extrasDiv = document.getElementById('listadoExtrasFijas');
-            if (bebidasDiv) {
-                bebidasDiv.innerHTML = (menuFijo.bebidas || []).map(b => `
-                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--neutral-200); padding:4px 0;">
-                        <span>${b.nombre}</span><span>$${b.precio.toFixed(2)}</span>
-                    </div>
-                `).join('') || '<small style="color:var(--neutral-600);">Sin bebidas fijas</small>';
-            }
-            if (extrasDiv) {
-                extrasDiv.innerHTML = (menuFijo.extras || []).map(e => `
-                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--neutral-200); padding:4px 0;">
-                        <span>${e.nombre}</span><span>S/.${e.precio.toFixed(2)}</span>
-                    </div>
-                `).join('') || '<small style="color:var(--neutral-600);">Sin extras fijos</small>';
-            }
+            const listadoBebidas = document.getElementById('listadoBebidasFijas');
+            const listadoExtras = document.getElementById('listadoExtrasFijas');
             const resumenBebidas = document.getElementById('resumenBebidasFijas');
             const resumenExtras = document.getElementById('resumenExtrasFijas');
-            if (resumenBebidas) {
-                const list = menuFijo.bebidas || [];
-                const totalItems = list.length;
-                const totalPrecio = list.reduce((acc, i) => acc + Number(i.precio || 0), 0);
-                const totalStock = list.reduce((acc, i) => acc + Number(i.stock || 0), 0);
-                resumenBebidas.innerHTML = totalItems === 0 ? '<div style="color: var(--text-muted);">Sin bebidas fijas</div>' : `
-                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                        <div><strong>Items:</strong> ${totalItems}</div>
-                        <div><strong>Stock:</strong> ${totalStock}</div>
-                        <div><strong>Precio total:</strong> S/.${totalPrecio.toFixed(2)}</div>
-                    </div>
-                    <ul style="list-style:none; padding:0; margin-top:8px;">
-                        ${list.map(i => `<li style="border-bottom:1px solid var(--neutral-200); padding:6px 0;"><strong>${i.nombre}</strong> <span style="color:var(--neutral-600)">- S/.${Number(i.precio).toFixed(2)} (${i.stock || 0})</span></li>`).join('')}
-                    </ul>
-                `;
+            
+            // --- BEBIDAS (Admin y Resumen) ---
+            if (listadoBebidas) {
+                let html = '';
+                (menuFijo.bebidas || []).forEach((item, index) => {
+                    html += `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--neutral-100);">
+                            <span style="font-size: 0.85rem;">${item.nombre} (S/.${item.precio.toFixed(2)})</span>
+                            <button onclick="eliminarItemFijo('bebidas', ${index})" class="btn btn-danger" style="padding: 2px 5px; font-size: 0.7rem;">❌</button>
+                        </div>
+                    `;
+                });
+                listadoBebidas.innerHTML = html || '<small style="color:var(--neutral-600);">Sin bebidas fijas</small>';
             }
+            
+            if (resumenBebidas) {
+                let html = '<div class="grid grid-2" style="gap: 10px;">';
+                (menuFijo.bebidas || []).forEach(item => {
+                    html += `
+                        <div style="background: var(--bg-tertiary); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center;">
+                            <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 4px;">${item.nombre}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="color: var(--primary-color); font-weight: 700; font-size: 0.85rem;">S/.${item.precio.toFixed(2)}</div>
+                                <div style="font-size: 0.7rem; color: var(--neutral-600);">Stock: ${item.stock || 0}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                resumenBebidas.innerHTML = (menuFijo.bebidas || []).length > 0 ? html + '</div>' : '<div style="color: var(--text-muted); font-style: italic; text-align: center; width: 100%;">Sin bebidas fijas</div>';
+            }
+
+            // --- EXTRAS (Admin y Resumen) ---
+            if (listadoExtras) {
+                let html = '';
+                (menuFijo.extras || []).forEach((item, index) => {
+                    html += `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--neutral-100);">
+                            <span style="font-size: 0.85rem;">${item.nombre} (S/.${item.precio.toFixed(2)})</span>
+                            <button onclick="eliminarItemFijo('extras', ${index})" class="btn btn-danger" style="padding: 2px 5px; font-size: 0.7rem;">❌</button>
+                        </div>
+                    `;
+                });
+                listadoExtras.innerHTML = html || '<small style="color:var(--neutral-600);">Sin extras fijos</small>';
+            }
+            
             if (resumenExtras) {
-                const list = menuFijo.extras || [];
-                const totalItems = list.length;
-                const totalPrecio = list.reduce((acc, i) => acc + Number(i.precio || 0), 0);
-                const totalStock = list.reduce((acc, i) => acc + Number(i.stock || 0), 0);
-                resumenExtras.innerHTML = totalItems === 0 ? '<div style="color: var(--text-muted);">Sin extras fijos</div>' : `
-                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                        <div><strong>Items:</strong> ${totalItems}</div>
-                        <div><strong>Stock:</strong> ${totalStock}</div>
-                        <div><strong>Precio total:</strong> $${totalPrecio.toFixed(2)}</div>
-                    </div>
-                    <ul style="list-style:none; padding:0; margin-top:8px;">
-                        ${list.map(i => `<li style="border-bottom:1px solid var(--neutral-200); padding:6px 0;"><strong>${i.nombre}</strong> <span style="color:var(--neutral-600)">- $${Number(i.precio).toFixed(2)} (${i.stock || 0})</span></li>`).join('')}
-                    </ul>
-                `;
+                let html = '<div class="grid grid-2" style="gap: 10px;">';
+                (menuFijo.extras || []).forEach(item => {
+                    html += `
+                        <div style="background: var(--bg-tertiary); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center;">
+                            <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 4px;">${item.nombre}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="color: var(--primary-color); font-weight: 700; font-size: 0.85rem;">S/.${item.precio.toFixed(2)}</div>
+                                <div style="font-size: 0.7rem; color: var(--neutral-600);">Stock: ${item.stock || 0}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                resumenExtras.innerHTML = (menuFijo.extras || []).length > 0 ? html + '</div>' : '<div style="color: var(--text-muted); font-style: italic; text-align: center; width: 100%;">Sin extras fijos</div>';
             }
         }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaranTe v6.18 - Sistema de Gestión de Restaurante</title>
+    <title>TaranTe v6.19 - Sistema de Gestión de Restaurante</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -11,7 +11,7 @@
     
     <!-- Firebase Configuration -->
     <script>
-        const APP_VERSION = '6.18';
+        const APP_VERSION = '6.19';
         const firebaseConfig = {
             apiKey: "AIzaSyAEB1xiIH_wUolK8NAJcklIfRV33QoBDuM",
             authDomain: "fenix-restaurant.firebaseapp.com",
@@ -3133,6 +3133,15 @@
             const subcategoria = selectedOption.dataset.subcategoria;
             const itemId = selectedOption.dataset.itemId;
             
+            // Descontar stock inmediatamente
+            if (['bebidas', 'extras'].includes(categoria)) {
+                const itemFijo = menuFijo[categoria].find(i => i.id === itemId);
+                if (itemFijo) itemFijo.stock -= cantidad;
+            } else {
+                const itemMenu = menuSemanal[diaSeleccionado][categoria].find(i => i.id === itemId);
+                if (itemMenu) itemMenu.stock -= cantidad;
+            }
+
             carritoComandas.push({
                 mesa: mesa,
                 nombre: selectedOption.text.split(' - ')[0],
@@ -3162,9 +3171,16 @@
             cantidadInput.value = 1;
             if (acotacionesInput) acotacionesInput.value = '';
             
+            // Sincronizar stock con Firebase
+            guardarMenuSemanal();
+            if (window.db) {
+                window.db.collection('menu').doc('fijo').set(menuFijo);
+            }
+
             actualizarResumenPedido();
             actualizarMesas();
             actualizarDashboard();
+            cargarProductosDelMenu(); // Recargar select para ver nuevo stock
             addDebugLog(`📋 Producto agregado: ${selectedOption.text} para ${tipoPedido === 'mesa' ? 'Mesa ' + mesa : 'Llevar'}${acotaciones ? ' (Acotaciones: ' + acotaciones + ')' : ''}`);
             guardarDatosSistema();
         }
@@ -3245,6 +3261,25 @@
         }
 
         function eliminarProducto(index) {
+            const item = carritoComandas[index];
+            if (item) {
+                // Devolver stock al menú
+                if (['bebidas', 'extras'].includes(item.categoria)) {
+                    const itemFijo = menuFijo[item.categoria].find(i => i.id === item.itemId);
+                    if (itemFijo) itemFijo.stock += item.cantidad;
+                } else {
+                    const itemMenu = menuSemanal[diaSeleccionado][item.categoria].find(i => i.id === item.itemId);
+                    if (itemMenu) itemMenu.stock += item.cantidad;
+                }
+                
+                // Sincronizar stock devuelto
+                guardarMenuSemanal();
+                if (window.db) {
+                    window.db.collection('menu').doc('fijo').set(menuFijo);
+                }
+                cargarProductosDelMenu(); // Actualizar select con nuevo stock
+            }
+
             carritoComandas.splice(index, 1);
             actualizarResumenPedido();
             actualizarMesas();

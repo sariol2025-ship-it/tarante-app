@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaranTe v6.15 - Sistema de Gestión de Restaurante</title>
+    <title>TaranTe v6.17 - Sistema de Gestión de Restaurante</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -11,7 +11,7 @@
     
     <!-- Firebase Configuration -->
     <script>
-        const APP_VERSION = '6.15';
+        const APP_VERSION = '6.17';
         const firebaseConfig = {
             apiKey: "AIzaSyAEB1xiIH_wUolK8NAJcklIfRV33QoBDuM",
             authDomain: "fenix-restaurant.firebaseapp.com",
@@ -1555,100 +1555,138 @@
             const regexMesa = /(?:mesa|meza)\s+(\d+)/;
             const regexParaLlevar = /(?:para llevar|llevar)/;
             const regexCantidad = /(\d+)\s+(?:de\s+)?/;
-
-            let mesa = null;
-            let paraLlevar = false;
-            let cantidad = 1;
-            let productoBuscado = input;
-
-            // 1. Detectar Mesa o Para Llevar
+            
+            // Detectar Mesa o Para Llevar (Global para todo el dictado)
+            let mesaGlobal = null;
+            let paraLlevarGlobal = false;
+            
             const matchMesa = input.match(regexMesa);
             if (matchMesa) {
-                mesa = parseInt(matchMesa[1]);
-                productoBuscado = productoBuscado.replace(matchMesa[0], '');
+                mesaGlobal = parseInt(matchMesa[1]);
             } else if (regexParaLlevar.test(input)) {
-                paraLlevar = true;
-                productoBuscado = productoBuscado.replace(regexParaLlevar, '');
+                paraLlevarGlobal = true;
             }
 
-            // 2. Detectar Cantidad
-            const matchCantidad = productoBuscado.match(regexCantidad);
-            if (matchCantidad) {
-                cantidad = parseInt(matchCantidad[1]);
-                productoBuscado = productoBuscado.replace(matchCantidad[0], '');
-            }
+            // Separar comandos por conectores comunes (y, con, además)
+            // Pero ignorar "con" si es parte de una acotación (ej: con sal)
+            const partes = input.split(/\s+y\s+|\s+ademas\s+|\s+además\s+/);
+            let productosAgregados = 0;
 
-            // 3. Extraer Acotación
-            let acotacion = "";
-            const acotacionKeywords = [" sin ", " con ", " poco ", " extra ", " solo "];
-            for (let kw of acotacionKeywords) {
-                const idx = productoBuscado.indexOf(kw);
-                if (idx !== -1) {
-                    acotacion = productoBuscado.substring(idx).trim();
-                    productoBuscado = productoBuscado.substring(0, idx).trim();
-                    break;
+            partes.forEach(parte => {
+                let texto = parte.trim();
+                if (!texto) return;
+
+                // Limpiar referencia a mesa/llevar de la parte individual si ya se detectó globalmente
+                if (mesaGlobal) texto = texto.replace(regexMesa, '');
+                if (paraLlevarGlobal) texto = texto.replace(regexParaLlevar, '');
+
+                // Detectar Cantidad específica de esta parte
+                let cantidad = 1;
+                const matchCantidad = texto.match(regexCantidad);
+                if (matchCantidad) {
+                    cantidad = parseInt(matchCantidad[1]);
+                    texto = texto.replace(matchCantidad[0], '');
                 }
-            }
 
-            productoBuscado = productoBuscado.trim()
-                .replace(/^(agrega|agregame|pon|ponme|pide|pideme|quiero|necesito)\s+/, '')
-                .trim();
-
-            // 4. Buscar Producto
-            const menuDelDia = obtenerMenuDelDia();
-            let encontrado = null;
-
-            // Buscar en menú del día
-            for (let [cat, items] of Object.entries(menuDelDia)) {
-                const item = items.find(i => productoBuscado.includes(i.nombre.toLowerCase()) || i.nombre.toLowerCase().includes(productoBuscado));
-                if (item) { encontrado = { ...item, categoria: cat }; break; }
-            }
-
-            if (!encontrado) {
-                for (let cat of ['bebidas', 'extras']) {
-                    const item = (menuFijo[cat] || []).find(i => productoBuscado.includes(i.nombre.toLowerCase()) || i.nombre.toLowerCase().includes(productoBuscado));
-                    if (item) { encontrado = { ...item, categoria: cat }; break; }
+                // Extraer Acotación
+                let acotacion = "";
+                const acotacionKeywords = [" sin ", " con ", " poco ", " extra ", " solo "];
+                for (let kw of acotacionKeywords) {
+                    const idx = texto.indexOf(kw);
+                    if (idx !== -1) {
+                        acotacion = texto.substring(idx).trim();
+                        texto = texto.substring(0, idx).trim();
+                        break;
+                    }
                 }
-            }
 
-            if (!encontrado) {
-                hablar(`No encontré el plato ${productoBuscado}`);
-                setStatusVoz(`❌ Plato no encontrado: ${productoBuscado}`);
-                return;
-            }
+                let productoBuscado = texto.trim()
+                    .replace(/^(agrega|agregame|pon|ponme|pide|pideme|quiero|necesito)\s+/, '')
+                    .trim();
 
-            if (!paraLlevar && !mesa) {
-                hablar("¿Para qué mesa es el pedido?");
-                setStatusVoz("⚠️ Falta indicar la mesa");
-                return;
-            }
+                if (!productoBuscado) return;
 
-            // 6. Ejecutar Pedido
-            const tipoRadio = document.querySelector(`input[name="tipoPedido"][value="${paraLlevar ? 'llevar' : 'mesa'}"]`);
-            if (tipoRadio) {
-                tipoRadio.checked = true;
-                toggleMesaSelect(!paraLlevar);
-            }
-            
-            if (!paraLlevar) {
-                const mSelect = document.getElementById('mesaSelect');
-                if (mSelect) mSelect.value = mesa;
-            }
+                // Buscar Producto (Mejorado con búsqueda por palabras clave)
+                const menuDelDia = obtenerMenuDelDia();
+                let encontrado = null;
+                let mejorCoincidencia = -1;
 
-            const pSelect = document.getElementById('productoSelect');
-            if (pSelect) pSelect.value = `${encontrado.categoria}_${encontrado.id}`;
-            
-            const cInput = document.getElementById('cantidadInput');
-            if (cInput) cInput.value = cantidad;
-            
-            const aInput = document.getElementById('acotacionesInput');
-            if (aInput) aInput.value = acotacion;
+                const buscarEnLista = (lista, categoria) => {
+                    lista.forEach(item => {
+                        const nombreL = item.nombre.toLowerCase();
+                        // 1. Coincidencia exacta
+                        if (nombreL === productoBuscado) {
+                            encontrado = { ...item, categoria };
+                            mejorCoincidencia = 100;
+                        } 
+                        // 2. Contiene el término buscado (ej: "cau" en "cau cau")
+                        else if (nombreL.includes(productoBuscado) && mejorCoincidencia < 50) {
+                            encontrado = { ...item, categoria };
+                            mejorCoincidencia = 50;
+                        }
+                        // 3. El término buscado contiene el nombre (ej: "lomo" en "lomo saltado")
+                        else if (productoBuscado.includes(nombreL) && mejorCoincidencia < 40) {
+                            encontrado = { ...item, categoria };
+                            mejorCoincidencia = 40;
+                        }
+                        // 4. Búsqueda por palabras individuales (mínimo 3 letras)
+                        else if (productoBuscado.length >= 3) {
+                            const palabrasBuscadas = productoBuscado.split(' ');
+                            const palabrasNombre = nombreL.split(' ');
+                            const coincidencias = palabrasBuscadas.filter(p => p.length >= 3 && palabrasNombre.some(pn => pn.includes(p)));
+                            if (coincidencias.length > 0 && coincidencias.length > mejorCoincidencia) {
+                                encontrado = { ...item, categoria };
+                                mejorCoincidencia = coincidencias.length;
+                            }
+                        }
+                    });
+                };
 
-            agregarProducto();
-            
-            const msgExito = `${cantidad} ${encontrado.nombre} para ${paraLlevar ? 'llevar' : 'mesa ' + mesa}`;
-            hablar(msgExito);
-            showNotification(msgExito, 'success');
+                Object.entries(menuDelDia).forEach(([cat, items]) => buscarEnLista(items, cat));
+                if (!encontrado) {
+                    ['bebidas', 'extras'].forEach(cat => buscarEnLista(menuFijo[cat] || [], cat));
+                }
+
+                if (encontrado) {
+                    if (!paraLlevarGlobal && !mesaGlobal) {
+                        hablar(`¿Para qué mesa es el ${encontrado.nombre}?`);
+                        setStatusVoz(`⚠️ Falta indicar la mesa para: ${encontrado.nombre}`);
+                        return;
+                    }
+
+                    // Ejecutar Pedido
+                    const mesaFinal = paraLlevarGlobal ? 999 : mesaGlobal;
+                    const tipoPedidoFinal = paraLlevarGlobal ? 'llevar' : 'mesa';
+
+                    // Actualizar UI temporalmente para agregarProducto
+                    const tipoRadio = document.querySelector(`input[name="tipoPedido"][value="${tipoPedidoFinal}"]`);
+                    if (tipoRadio) {
+                        tipoRadio.checked = true;
+                        toggleMesaSelect(!paraLlevarGlobal);
+                    }
+                    if (!paraLlevarGlobal) {
+                        const mSelect = document.getElementById('mesaSelect');
+                        if (mSelect) mSelect.value = mesaFinal;
+                    }
+                    const pSelect = document.getElementById('productoSelect');
+                    if (pSelect) pSelect.value = `${encontrado.categoria}_${encontrado.id}`;
+                    const cInput = document.getElementById('cantidadInput');
+                    if (cInput) cInput.value = cantidad;
+                    const aInput = document.getElementById('acotacionesInput');
+                    if (aInput) aInput.value = acotacion;
+
+                    agregarProducto();
+                    productosAgregados++;
+                } else {
+                    setStatusVoz(`❌ No encontré: ${productoBuscado}`);
+                }
+            });
+
+            if (productosAgregados > 0) {
+                const msg = productosAgregados === 1 ? "Pedido agregado" : `${productosAgregados} pedidos agregados`;
+                hablar(msg);
+                showNotification(msg, 'success');
+            }
         }
 
         function guardarConfiguracionVoz() {
@@ -3151,33 +3189,63 @@
                 return;
             }
             
-            let html = '<div style="max-height: 300px; overflow-y: auto;">';
-            let total = 0;
-            
+            // Agrupar por mesa/tipo
+            const grupos = {};
             carritoComandas.forEach((item, index) => {
-                total += item.precioTotal;
-                const acotacionesText = item.acotaciones ? `<br><small style="color: var(--warning-color); font-style: italic;">📝 ${item.acotaciones}</small>` : '';
-                const tipoTexto = item.tipo === 'llevar' ? '🛍️ LLEVAR' : `🪑 Mesa ${item.mesa}`;
+                const key = item.tipo === 'llevar' ? 'llevar' : `mesa_${item.mesa}`;
+                if (!grupos[key]) {
+                    grupos[key] = {
+                        titulo: item.tipo === 'llevar' ? '🛍️ PARA LLEVAR' : `🪑 MESA ${item.mesa}`,
+                        items: []
+                    };
+                }
+                grupos[key].items.push({ ...item, originalIndex: index });
+            });
+            
+            let html = '<div style="max-height: 400px; overflow-y: auto;">';
+            let totalGeneral = 0;
+            
+            Object.values(grupos).forEach(grupo => {
                 html += `
-                    <div style="padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>${item.nombre}</strong>
-                            <br><small style="color: var(--neutral-600);">
-                                ${tipoTexto} | 🔢 ${item.cantidad}x | 🏷️ ${item.subcategoria}
-                            </small>
-                            ${acotacionesText}
+                    <div style="margin-bottom: 10px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                        <div style="background: var(--bg-tertiary); padding: 8px 12px; font-weight: bold; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); color: var(--primary-color);">
+                            ${grupo.titulo}
                         </div>
-                        <div>
-                            <strong>S/.${item.precioTotal.toFixed(2)}</strong>
-                            <br><button onclick="eliminarProducto(${index})" class="btn btn-danger" style="font-size: 0.7rem; padding: 2px 6px;">❌</button>
+                `;
+                
+                let subtotalGrupo = 0;
+                grupo.items.forEach(item => {
+                    subtotalGrupo += item.precioTotal;
+                    totalGeneral += item.precioTotal;
+                    const acotacionesText = item.acotaciones ? `<br><small style="color: var(--warning-color); font-style: italic;">📝 ${item.acotaciones}</small>` : '';
+                    html += `
+                        <div style="padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: white;">
+                            <div>
+                                <strong>${item.nombre}</strong>
+                                <br><small style="color: var(--neutral-600);">
+                                    🔢 ${item.cantidad}x | 🏷️ ${item.subcategoria}
+                                </small>
+                                ${acotacionesText}
+                            </div>
+                            <div style="text-align: right;">
+                                <strong>S/.${item.precioTotal.toFixed(2)}</strong>
+                                <br><button onclick="eliminarProducto(${item.originalIndex})" class="btn btn-danger" style="font-size: 0.7rem; padding: 2px 6px; margin-top: 4px;">❌</button>
+                            </div>
                         </div>
+                    `;
+                });
+                
+                html += `
+                    <div style="padding: 6px 12px; background: #f8fafc; text-align: right; font-size: 0.85rem; color: var(--text-secondary);">
+                        Subtotal: S/.${subtotalGrupo.toFixed(2)}
+                    </div>
                     </div>
                 `;
             });
             
             html += `
-                <div style="padding: 15px; background: var(--bg-tertiary); text-align: center; font-weight: bold; font-size: 1.1rem;">
-                    💰 Total: S/.${total.toFixed(2)}
+                <div style="padding: 15px; background: var(--primary-color); color: white; text-align: center; font-weight: bold; font-size: 1.2rem; border-radius: 8px; margin-top: 10px;">
+                    💰 TOTAL GENERAL: S/.${totalGeneral.toFixed(2)}
                 </div>
             `;
             html += '</div>';

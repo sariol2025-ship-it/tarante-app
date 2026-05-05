@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaranTe v6.21 - Sistema de Gestión de Restaurante</title>
+    <title>TaranTe v6.21 - Sistema de GestiÃ³n de Restaurante</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -26,9 +26,9 @@
             const db = firebase.firestore();
             window.db = db;
             window.firebase = firebase;
-            console.log('✅ Firebase inicializado correctamente');
+            console.log('âœ… Firebase inicializado correctamente');
         } catch (error) {
-            console.error('❌ Error inicializando Firebase:', error);
+            console.error('âŒ Error inicializando Firebase:', error);
             window.db = null;
             window.firebase = null;
         }
@@ -277,7 +277,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Estilos para temas de selección */
+        /* Estilos para temas de selecciÃ³n */
         .tema-card:hover {
             border: 2px solid white;
             transform: translateY(-2px);
@@ -353,7 +353,7 @@
             color: var(--text-primary);
         }
 
-        /* Animación para el Asistente de Voz */
+        /* AnimaciÃ³n para el Asistente de Voz */
         @keyframes pulse-voice {
             0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(99, 102, 241, 0); }
@@ -744,7 +744,7 @@
     <!-- Login Container -->
     <div id="loginContainer" class="login-container" style="display: none;">
         <div class="login-form">
-            <h2>🚀 TaranTe Restaurant</h2>
+            <h2>ðŸš€ TaranTe Restaurant</h2>
             <div id="versionLogin" style="margin-top: 4px; font-size: 0.85rem; color: var(--neutral-600); text-align: center;">v</div>
             <div class="form-group">
                 <label class="form-label">Usuario:</label>
@@ -752,12 +752,12 @@
             </div>
             
             <div class="form-group">
-                <label class="form-label">Contraseña:</label>
-                <input type="password" id="loginPass" class="form-control" placeholder="••••••••">
+                <label class="form-label">ContraseÃ±a:</label>
+                <input type="password" id="loginPass" class="form-control" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
             </div>
             <button onclick="login()" class="btn" style="width: 100%; margin-top: 1rem;">Ingresar</button>
             <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--neutral-600); text-align: center;">
-                <strong>Sistema de autenticación seguro</strong><br>
+                <strong>Sistema de autenticaciÃ³n seguro</strong><br>
                 <small>Contacte al administrador para credenciales</small>
             </div>
         </div>
@@ -772,22 +772,22 @@
         </div>
 
         <div class="nav">
-            <div class="logo">🚀 TaranTe Restaurant 
+            <div class="logo">ðŸš€ TaranTe Restaurant 
                 <span id="versionNav" style="font-size: 0.85rem; margin-left: 8px; background:#000; color:#fff; padding:2px 6px; border-radius:4px; font-weight:700;">v</span>
                 <span id="firebaseMini" style="margin-left:8px; display:inline-flex; align-items:center; gap:6px;">
-                    <span style="font-size:1rem;">🔥</span>
+                    <span style="font-size:1rem;">ðŸ”¥</span>
                     <span id="firebaseDot" style="width:10px; height:10px; border-radius:50%; display:inline-block; background:#d00;"></span>
                 </span>
                 <span id="usuarioMini" style="font-size: 0.85rem; margin-left: 8px; background:#000; color:#10b981; padding:2px 6px; border-radius:4px; font-weight:700; display:none;">usuario</span>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item active" data-view="dashboard">📊 Dashboard</li>
-                <li class="nav-item" data-view="comandas">📋 Comandas</li>
-                <li class="nav-item" data-view="cocina">👩‍🍳 Cocina</li>
-                <li class="nav-item" data-view="cuentas">💰 Cuentas</li>
-                <li class="nav-item" data-view="menu">🍽️ Menú</li>
-                <li class="nav-item" data-view="informes">📈 Informes</li>
-                <li class="nav-item" data-view="configuracion">⚙️ Config</li>
+                <li class="nav-item active" data-view="dashboard">ðŸ“Š Dashboard</li>
+                <li class="nav-item" data-view="comandas">ðŸ“‹ Comandas</li>
+                <li class="nav-item" data-view="cocina">ðŸ‘©â€ðŸ³ Cocina</li>
+                <li class="nav-item" data-view="cuentas">ðŸ’° Cuentas</li>
+                <li class="nav-item" data-view="menu">ðŸ½ï¸ MenÃº</li>
+                <li class="nav-item" data-view="informes">ðŸ“ˆ Informes</li>
+                <li class="nav-item" data-view="configuracion">âš™ï¸ Config</li>
             </ul>
         </div>
     </div>
@@ -798,120 +798,77 @@
         <!-- ============ DASHBOARD ============ -->
         <div id="dashboardView" class="view active">
             <div class="view-header">
-                <h2>📊 Dashboard</h2>
-                <p>Sistema de gestión de restaurante TaranTe</p>
+                <h2>ðŸ“Š Dashboard</h2>
+                <p>Sistema de gestiÃ³n de restaurante TaranTe</p>
             </div>
 
-            <div class="panel-section">
-                <h3>📈 Estado de las Mesas</h3>
-                <div id="mesasGrid" class="mesas-container">
-                    <!-- Las mesas se generarán dinámicamente -->
-                </div>
-            </div>
-            
-            <div class="panel-section">
-                <h3>🍽️ Menú del Día</h3>
-                <div id="resumenMenuDia">
-                    <div style="color: var(--text-muted); font-style: italic; text-align: center; padding: 1rem;">
-                        No hay menú configurado para hoy
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-3">
-                <div class="panel">
-                    <div class="panel-header">🪑 Mesas Activas</div>
-                    <div class="panel-body">
-                        <h2 style="color: var(--success-color);" id="totalMesasActivas">0</h2>
-                        <p>Mesas con pedidos activos</p>
-                    </div>
-                </div>
-                
-                <div class="panel">
-                    <div class="panel-header">📋 Pedidos en Cocina</div>
-                    <div class="panel-body">
-                        <h2 style="color: var(--warning-color);" id="totalPedidosCocina">0</h2>
-                        <p>Pedidos pendientes</p>
-                    </div>
-                </div>
-                
-                <div class="panel">
-                    <div class="panel-header">💰 Ventas del Día</div>
-                    <div class="panel-body" id="panelVentasDia">
-                        <h2 style="color: var(--primary-color);" id="totalVentas">S/.0.00</h2>
-                        <p>Total facturado</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============ COMANDAS ============ -->
+            <!-- ============ COMANDAS ============ -->
         <div id="comandasView" class="view">
             <div class="view-header">
-                <h2>📋 Comandas</h2>
-                <p>Gestión de pedidos por mesa</p>
+                <h2>ðŸ“‹ Comandas</h2>
+                <p>GestiÃ³n de pedidos por mesa</p>
             </div>
 
             <div class="grid grid-3">
                 <div class="panel">
-                    <div class="panel-header">➕ Nueva Comanda</div>
+                    <div class="panel-header">âž• Nueva Comanda</div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="form-label">🛒 Tipo de Pedido:</label>
+                            <label class="form-label">ðŸ›’ Tipo de Pedido:</label>
                             <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="tipoPedido" value="mesa" checked onchange="toggleMesaSelect(true)"> 🪑 En Mesa
+                                    <input type="radio" name="tipoPedido" value="mesa" checked onchange="toggleMesaSelect(true)"> ðŸª‘ En Mesa
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="tipoPedido" value="llevar" onchange="toggleMesaSelect(false)"> 🛍️ Para Llevar
+                                    <input type="radio" name="tipoPedido" value="llevar" onchange="toggleMesaSelect(false)"> ðŸ›ï¸ Para Llevar
                                 </label>
                             </div>
                         </div>
 
                         <div class="form-group" id="mesaSelectGroup">
-                            <label class="form-label">🪑 Mesa:</label>
+                            <label class="form-label">ðŸª‘ Mesa:</label>
                             <select id="mesaSelect" class="form-control">
                                 <option value="">Seleccionar Mesa</option>
                             </select>
                         </div>
 
-                        <!-- Botón Asistente de Voz -->
+                        <!-- BotÃ³n Asistente de Voz -->
                         <div style="margin-bottom: 1.5rem; text-align: center;">
                             <button id="btnAsistenteVoz" onclick="toggleAsistenteVoz()" class="btn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; background: linear-gradient(135deg, #6366f1, #4f46e5);">
-                                <span id="iconAsistente">🎙️</span>
+                                <span id="iconAsistente">ðŸŽ™ï¸</span>
                                 <span id="textAsistente">Asistente de Voz</span>
                             </button>
                             <div id="statusVoz" style="margin-top: 8px; font-size: 0.85rem; color: var(--neutral-600); min-height: 1.2rem; font-style: italic;"></div>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">🍽️ Producto:</label>
+                            <label class="form-label">ðŸ½ï¸ Producto:</label>
                             <select id="productoSelect" class="form-control">
-                                <option value="">Seleccionar Producto del Menú del Día</option>
+                                <option value="">Seleccionar Producto del MenÃº del DÃ­a</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">🔢 Cantidad:</label>
+                            <label class="form-label">ðŸ”¢ Cantidad:</label>
                             <input type="number" id="cantidadInput" class="form-control" value="1" min="1">
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label">📝 Acotaciones (Opcional):</label>
+                            <label class="form-label">ðŸ“ Acotaciones (Opcional):</label>
                             <textarea id="acotacionesInput" class="form-control" rows="2" placeholder="Ej: poco arroz, sin menestra, extra salsa..."></textarea>
                         </div>
                         
-                        <button onclick="agregarProducto()" class="btn">➕ Agregar Producto</button>
+                        <button onclick="agregarProducto()" class="btn">âž• Agregar Producto</button>
                     </div>
                 </div>
                 
                 <div class="panel">
-                    <div class="panel-header">🛒 Carrito de Comandas</div>
+                    <div class="panel-header">ðŸ›’ Carrito de Comandas</div>
                     <div class="panel-body">
                         <div id="resumenPedido">
                             <p style="color: var(--neutral-600);">No hay productos en el carrito</p>
                         </div>
-                        <button onclick="enviarCocina()" class="btn" style="margin-top: 1rem;" id="btnEnviarCocina">🍳 Enviar a Cocina</button>
+                        <button onclick="enviarCocina()" class="btn" style="margin-top: 1rem;" id="btnEnviarCocina">ðŸ³ Enviar a Cocina</button>
                     </div>
                 </div>
             </div>
@@ -920,13 +877,13 @@
         <!-- ============ COCINA ============ -->
         <div id="cocinaView" class="view">
             <div class="view-header">
-                <h2>👩‍🍳 Vista de Cocina</h2>
-                <p>Gestión de pedidos en preparación</p>
+                <h2>ðŸ‘©â€ðŸ³ Vista de Cocina</h2>
+                <p>GestiÃ³n de pedidos en preparaciÃ³n</p>
             </div>
 
             <div class="grid grid-2">
                 <div class="panel-section">
-                    <h3>🍳 Pedidos en Preparación</h3>
+                    <h3>ðŸ³ Pedidos en PreparaciÃ³n</h3>
                     <div id="pedidosCocina">
                         <div style="color: var(--text-muted); font-style: italic; text-align: center; padding: 2rem;">
                             No hay pedidos en cocina
@@ -940,12 +897,12 @@
         <!-- ============ CUENTAS ============ -->
         <div id="cuentasView" class="view">
             <div class="view-header">
-                <h2>💰 Cuentas por Cobrar</h2>
-                <p>Gestión de facturación y pagos</p>
+                <h2>ðŸ’° Cuentas por Cobrar</h2>
+                <p>GestiÃ³n de facturaciÃ³n y pagos</p>
             </div>
 
             <div class="panel-section">
-                <h3>📋 Cuentas Pendientes</h3>
+                <h3>ðŸ“‹ Cuentas Pendientes</h3>
                 <div id="cuentasPendientes">
                     <div style="color: var(--text-muted); font-style: italic; text-align: center; padding: 2rem;">
                         No hay cuentas pendientes
@@ -954,48 +911,48 @@
             </div>
         </div>
 
-        <!-- ============ MENÚ ============ -->
+        <!-- ============ MENÃš ============ -->
         <div id="menuView" class="view">
             <div class="view-header">
-                <h2>🍽️ Menú Semanal</h2>
-                <p>Configuración del menú por día y categoría</p>
+                <h2>ðŸ½ï¸ MenÃº Semanal</h2>
+                <p>ConfiguraciÃ³n del menÃº por dÃ­a y categorÃ­a</p>
             </div>
 
-            <!-- Selector de Día -->
+            <!-- Selector de DÃ­a -->
             <div class="panel-section">
-                <h3>📅 Seleccionar Día</h3>
+                <h3>ðŸ“… Seleccionar DÃ­a</h3>
                 <div class="tabs" style="overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 5px;">
                     <button class="tab active" onclick="seleccionarDia('lunes', this)">Lun</button>
                     <button class="tab" onclick="seleccionarDia('martes', this)">Mar</button>
-                    <button class="tab" onclick="seleccionarDia('miercoles', this)">Mié</button>
+                    <button class="tab" onclick="seleccionarDia('miercoles', this)">MiÃ©</button>
                     <button class="tab" onclick="seleccionarDia('jueves', this)">Jue</button>
                     <button class="tab" onclick="seleccionarDia('viernes', this)">Vie</button>
-                    <button class="tab" onclick="seleccionarDia('sabado', this)">Sáb</button>
+                    <button class="tab" onclick="seleccionarDia('sabado', this)">SÃ¡b</button>
                     <button class="tab" onclick="seleccionarDia('domingo', this)">Dom</button>
                 </div>
             </div>
 
-            <!-- Vista de Items del Día -->
+            <!-- Vista de Items del DÃ­a -->
             <div id="vistaItemsDia">
                 <div class="panel-section" style="padding: 0.9rem 1rem;">
-                    <h3 id="tituloMenuDia" style="margin: 0;">Menú del día - Lunes</h3>
+                    <h3 id="tituloMenuDia" style="margin: 0;">MenÃº del dÃ­a - Lunes</h3>
                 </div>
                 <div id="itemsMenuDia" class="grid grid-1">
-                    <!-- Los items se mostrarán aquí con un diseño optimizado para móvil -->
+                    <!-- Los items se mostrarÃ¡n aquÃ­ con un diseÃ±o optimizado para mÃ³vil -->
                 </div>
             </div>
             
             <div class="panel-section">
-                <h3>🧾 Bebidas y Extras</h3>
+                <h3>ðŸ§¾ Bebidas y Extras</h3>
                 <div class="grid grid-2" id="gridMenuFijo">
                     <div class="panel">
-                        <div class="panel-header">🥤 Bebidas</div>
+                        <div class="panel-header">ðŸ¥¤ Bebidas</div>
                         <div class="panel-body" id="resumenBebidasFijas">
                             <div style="color: var(--text-muted);">Sin bebidas fijas</div>
                         </div>
                     </div>
                     <div class="panel">
-                        <div class="panel-header">🍟 Extras</div>
+                        <div class="panel-header">ðŸŸ Extras</div>
                         <div class="panel-body" id="resumenExtrasFijas">
                             <div style="color: var(--text-muted);">Sin extras fijos</div>
                         </div>
@@ -1004,31 +961,31 @@
             </div>
         </div>
 
-        <!-- ============ INFORMES Y ESTADÍSTICAS ============ -->
+        <!-- ============ INFORMES Y ESTADÃSTICAS ============ -->
         <div id="informesView" class="view">
             <div class="view-header">
-                <h2>📈 Informes y Estadísticas</h2>
-                <p>Análisis detallado del rendimiento del restaurante</p>
+                <h2>ðŸ“ˆ Informes y EstadÃ­sticas</h2>
+                <p>AnÃ¡lisis detallado del rendimiento del restaurante</p>
             </div>
             
             <!-- Resumen General -->
             <div class="grid grid-4">
                 <div class="panel">
-                    <div class="panel-header">💰 Ventas del Día</div>
+                    <div class="panel-header">ðŸ’° Ventas del DÃ­a</div>
                     <div class="panel-body">
                         <h3 style="color: var(--success-color); margin: 0;" id="ventasTotal">S/.0.00</h3>
                         <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: var(--neutral-600);">Total facturado</p>
                         <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: var(--neutral-700);">
-                            💵 Efectivo: <span id="ventasEfectivoTotal">$0.00</span> · 🏦 Transferencia: <span id="ventasTransferenciaTotal">$0.00</span>
+                            ðŸ’µ Efectivo: <span id="ventasEfectivoTotal">$0.00</span> Â· ðŸ¦ Transferencia: <span id="ventasTransferenciaTotal">$0.00</span>
                         </p>
                         <div style="margin-top:8px;">
-                            <small style="color: var(--neutral-600);">Fuente: historial de cobros del día</small>
+                            <small style="color: var(--neutral-600);">Fuente: historial de cobros del dÃ­a</small>
                         </div>
                     </div>
                 </div>
                 
                 <div class="panel">
-                    <div class="panel-header">🪑 Mesas Activas</div>
+                    <div class="panel-header">ðŸª‘ Mesas Activas</div>
                     <div class="panel-body">
                         <h3 style="color: var(--primary-color); margin: 0;" id="mesasActivasTotal">0</h3>
                         <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: var(--neutral-600);">Con pedidos activos</p>
@@ -1036,7 +993,7 @@
                 </div>
                 
                 <div class="panel">
-                    <div class="panel-header">📋 Pedidos Totales</div>
+                    <div class="panel-header">ðŸ“‹ Pedidos Totales</div>
                     <div class="panel-body">
                         <h3 style="color: var(--warning-color); margin: 0;" id="pedidosTotales">0</h3>
                         <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: var(--neutral-600);">Pedidos procesados</p>
@@ -1044,56 +1001,56 @@
                 </div>
                 
                 <div class="panel">
-                    <div class="panel-header">👥 Transacciones</div>
+                    <div class="panel-header">ðŸ‘¥ Transacciones</div>
                     <div class="panel-body">
                         <h3 style="color: var(--info-color); margin: 0;" id="transaccionesTotal">0</h3>
                         <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: var(--neutral-600);">Operaciones realizadas</p>
                         <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: var(--neutral-700);">
-                            💵 Efectivo: <span id="transaccionesEfectivoTotal">0</span> · 🏦 Transferencia: <span id="transaccionesTransferenciaTotal">0</span>
+                            ðŸ’µ Efectivo: <span id="transaccionesEfectivoTotal">0</span> Â· ðŸ¦ Transferencia: <span id="transaccionesTransferenciaTotal">0</span>
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Gráficos de Rendimiento -->
+            <!-- GrÃ¡ficos de Rendimiento -->
             <div class="grid grid-2" style="margin-top: 2rem;">
                 <div class="panel">
-                    <div class="panel-header">📊 Rendimiento por Mesa</div>
+                    <div class="panel-header">ðŸ“Š Rendimiento por Mesa</div>
                     <div class="panel-body">
                         <div id="mesasChartData">
-                            <!-- Datos se generarán dinámicamente -->
+                            <!-- Datos se generarÃ¡n dinÃ¡micamente -->
                         </div>
                     </div>
                 </div>
                 
                 <div class="panel">
-                    <div class="panel-header">💰 Ventas por Categoría</div>
+                    <div class="panel-header">ðŸ’° Ventas por CategorÃ­a</div>
                     <div class="panel-body">
                         <div id="categoriasChartData">
-                            <!-- Datos se generarán dinámicamente -->
+                            <!-- Datos se generarÃ¡n dinÃ¡micamente -->
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Estadísticas Detalladas -->
+            <!-- EstadÃ­sticas Detalladas -->
             <div class="panel-section" style="margin-top: 2rem;">
-                <h3>📈 Estadísticas Detalladas</h3>
+                <h3>ðŸ“ˆ EstadÃ­sticas Detalladas</h3>
                 <div class="grid grid-3">
                     <div class="stat-card">
-                        <h4>🏆 Mesa Más Activa</h4>
+                        <h4>ðŸ† Mesa MÃ¡s Activa</h4>
                         <p id="mesaTop" style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color);">-</p>
-                        <small style="color: var(--neutral-600);">Mayor número de pedidos</small>
+                        <small style="color: var(--neutral-600);">Mayor nÃºmero de pedidos</small>
                     </div>
                     
                     <div class="stat-card">
-                        <h4>🍽️ Producto Más Vendido</h4>
+                        <h4>ðŸ½ï¸ Producto MÃ¡s Vendido</h4>
                         <p id="productoTop" style="font-size: 1.2rem; font-weight: bold; color: var(--success-color);">-</p>
                         <small style="color: var(--neutral-600);">Mayor demanda</small>
                     </div>
                     
                     <div class="stat-card">
-                        <h4>⏰ Tiempo Promedio</h4>
+                        <h4>â° Tiempo Promedio</h4>
                         <p id="tiempoPromedio" style="font-size: 1.2rem; font-weight: bold; color: var(--warning-color);">-</p>
                         <small style="color: var(--neutral-600);">Procesamiento de pedidos</small>
                     </div>
@@ -1102,7 +1059,7 @@
 
             <!-- Tabla de Rendimiento -->
             <div class="panel-section">
-                <h3>📋 Rendimiento por Hora</h3>
+                <h3>ðŸ“‹ Rendimiento por Hora</h3>
                 <div style="overflow-x: auto;">
                     <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
                         <thead>
@@ -1114,14 +1071,14 @@
                             </tr>
                         </thead>
                         <tbody id="tablaRendimiento">
-                            <!-- Datos se generarán dinámicamente -->
+                            <!-- Datos se generarÃ¡n dinÃ¡micamente -->
                         </tbody>
                     </table>
                 </div>
             </div>
             
             <div class="panel-section" style="margin-top: 2rem;">
-                <h3>📝 Acotaciones del Día</h3>
+                <h3>ðŸ“ Acotaciones del DÃ­a</h3>
                 <div id="acotacionesDiaList" style="margin-top: 8px;">
                     <div style="color: var(--text-muted); font-style: italic; text-align: center; padding: 1rem;">
                         No hay acotaciones registradas hoy
@@ -1130,41 +1087,41 @@
             </div>
         </div>
 
-        <!-- ============ CONFIGURACIÓN ============ -->
+        <!-- ============ CONFIGURACIÃ“N ============ -->
         <div id="configuracionView" class="view">
             <div class="view-header">
-                <h2>⚙️ Configuración</h2>
+                <h2>âš™ï¸ ConfiguraciÃ³n</h2>
                 <p>Personaliza tu experiencia</p>
             </div>
             
             <!-- Selector de Temas -->
             <div class="panel-section" id="panelTemasConfig">
-                <h3>🎨 Temas del Sistema</h3>
-                <p>Selecciona el tema que más te guste:</p>
+                <h3>ðŸŽ¨ Temas del Sistema</h3>
+                <p>Selecciona el tema que mÃ¡s te guste:</p>
                 
                 <div class="tema-selector" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0;">
                     <div class="tema-card" onclick="cambiarTema('verde')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
-                        <div style="font-size: 2em; margin-bottom: 8px;">🟢</div>
+                        <div style="font-size: 2em; margin-bottom: 8px;">ðŸŸ¢</div>
                         <div style="font-weight: 600;">Verde</div>
                     </div>
                     
                     <div class="tema-card" onclick="cambiarTema('azul')" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
-                        <div style="font-size: 2em; margin-bottom: 8px;">🔵</div>
+                        <div style="font-size: 2em; margin-bottom: 8px;">ðŸ”µ</div>
                         <div style="font-weight: 600;">Azul</div>
                     </div>
                     
                     <div class="tema-card" onclick="cambiarTema('purpura')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
-                        <div style="font-size: 2em; margin-bottom: 8px;">🟣</div>
-                        <div style="font-weight: 600;">Púrpura</div>
+                        <div style="font-size: 2em; margin-bottom: 8px;">ðŸŸ£</div>
+                        <div style="font-weight: 600;">PÃºrpura</div>
                     </div>
                     
                     <div class="tema-card" onclick="cambiarTema('naranja')" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
-                        <div style="font-size: 2em; margin-bottom: 8px;">🟠</div>
+                        <div style="font-size: 2em; margin-bottom: 8px;">ðŸŸ </div>
                         <div style="font-weight: 600;">Naranja</div>
                     </div>
                     
                     <div class="tema-card" onclick="cambiarTema('rosa')" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; border: 2px solid transparent;">
-                        <div style="font-size: 2em; margin-bottom: 8px;">🩷</div>
+                        <div style="font-size: 2em; margin-bottom: 8px;">ðŸ©·</div>
                         <div style="font-weight: 600;">Rosa</div>
                     </div>
                 </div>
@@ -1172,124 +1129,124 @@
             
             <!-- Panel de Permisos (Solo para Administradores) -->
             <div class="panel-section" id="panelPermisosSection" style="display: none;">
-                <h3>🔐 Gestión de Permisos</h3>
+                <h3>ðŸ” GestiÃ³n de Permisos</h3>
                 <p>Administra los permisos de acceso para cada usuario del sistema:</p>
                 
                 <div id="panelPermisos" style="margin-top: 20px;">
-                    <!-- El contenido se carga dinámicamente con JavaScript -->
+                    <!-- El contenido se carga dinÃ¡micamente con JavaScript -->
                 </div>
             </div>
             
-            <!-- Configuración de Sonidos -->
+            <!-- ConfiguraciÃ³n de Sonidos -->
             <div class="panel-section" id="panelSonidos">
-                <h3>🔊 Configuración de Sonidos</h3>
+                <h3>ðŸ”Š ConfiguraciÃ³n de Sonidos</h3>
                 <p>Activa o desactiva los sonidos del sistema:</p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; background: var(--bg-tertiary); padding: 12px; border-radius: 8px;">
-                        <input type="checkbox" id="chkSonidoNuevoPedido" checked onchange="guardarConfiguracionSonidos()"> 🔔 Nuevo Pedido
+                        <input type="checkbox" id="chkSonidoNuevoPedido" checked onchange="guardarConfiguracionSonidos()"> ðŸ”” Nuevo Pedido
                     </label>
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; background: var(--bg-tertiary); padding: 12px; border-radius: 8px;">
-                        <input type="checkbox" id="chkSonidoPedidoListo" checked onchange="guardarConfiguracionSonidos()"> ✅ Pedido Listo
+                        <input type="checkbox" id="chkSonidoPedidoListo" checked onchange="guardarConfiguracionSonidos()"> âœ… Pedido Listo
                     </label>
                 </div>
             </div>
 
-            <!-- Configuración de Asistente de Voz -->
+            <!-- ConfiguraciÃ³n de Asistente de Voz -->
             <div class="panel-section" id="panelVoz">
-                <h3>🎙️ Asistente de Voz</h3>
+                <h3>ðŸŽ™ï¸ Asistente de Voz</h3>
                 <p>Personaliza el comportamiento del asistente:</p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; background: var(--bg-tertiary); padding: 12px; border-radius: 8px;">
-                        <input type="checkbox" id="chkRespuestaVoz" onchange="guardarConfiguracionVoz()"> 🗣️ Respuesta con voz
+                        <input type="checkbox" id="chkRespuestaVoz" onchange="guardarConfiguracionVoz()"> ðŸ—£ï¸ Respuesta con voz
                     </label>
                 </div>
             </div>
                 <div style="margin: 20px 0;">
                     <div style="display: grid; gap: 10px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--neutral-50); border-radius: 6px;">
-                            <span>🛒 Agregar Producto</span>
+                            <span>ðŸ›’ Agregar Producto</span>
                             <input type="checkbox" checked onchange="cambiarConfiguracionSonido('agregarProducto', this.checked)">
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--neutral-50); border-radius: 6px;">
-                            <span>📋 Enviar a Cocina</span>
+                            <span>ðŸ“‹ Enviar a Cocina</span>
                             <input type="checkbox" checked onchange="cambiarConfiguracionSonido('enviarCocina', this.checked)">
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--neutral-50); border-radius: 6px;">
-                            <span>🍽️ Pedido Listo</span>
+                            <span>ðŸ½ï¸ Pedido Listo</span>
                             <input type="checkbox" checked onchange="cambiarConfiguracionSonido('pedidoListo', this.checked)">
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--neutral-50); border-radius: 6px;">
-                            <span>🧾 Mesa a Cuentas</span>
+                            <span>ðŸ§¾ Mesa a Cuentas</span>
                             <input type="checkbox" checked onchange="cambiarConfiguracionSonido('mesaCuenta', this.checked)">
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--neutral-50); border-radius: 6px;">
-                            <span>💰 Cobro Exitoso</span>
+                            <span>ðŸ’° Cobro Exitoso</span>
                             <input type="checkbox" checked onchange="cambiarConfiguracionSonido('cobroExitoso', this.checked)">
                         </div>
                     </div>
                 </div>
                 
                 <div style="text-align: center; margin-top: 15px;">
-                    <button onclick="probarSonidos()" class="btn">🔊 Probar Sonidos</button>
+                    <button onclick="probarSonidos()" class="btn">ðŸ”Š Probar Sonidos</button>
                 </div>
             </div>
             
-            <!-- Gestión de Historial y Datos -->
+            <!-- GestiÃ³n de Historial y Datos -->
             <div class="panel-section" id="panelHistorialDatos">
-                <h3>📊 Gestión de Historial y Datos</h3>
+                <h3>ðŸ“Š GestiÃ³n de Historial y Datos</h3>
                 <p>Administra los datos del sistema:</p>
                 
                 <div style="margin: 20px 0;">
                     <div style="display: grid; gap: 15px;">
                         <div style="background: var(--neutral-50); padding: 15px; border-radius: 8px; border-left: 4px solid var(--warning-color);">
-                            <h4 style="margin: 0 0 10px 0; color: var(--warning-color);">🗑️ Eliminar Historial</h4>
-                            <p style="margin: 0 0 15px 0; color: var(--neutral-600);">Elimina los datos de ventas y estadísticas del sistema.</p>
+                            <h4 style="margin: 0 0 10px 0; color: var(--warning-color);">ðŸ—‘ï¸ Eliminar Historial</h4>
+                            <p style="margin: 0 0 15px 0; color: var(--neutral-600);">Elimina los datos de ventas y estadÃ­sticas del sistema.</p>
                             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                <button onclick="eliminarHistorialDia()" class="btn btn-warning">📅 Historial del Día</button>
-                                <button onclick="eliminarHistorialSemanal()" class="btn btn-warning">📆 Historial Semanal</button>
+                                <button onclick="eliminarHistorialDia()" class="btn btn-warning">ðŸ“… Historial del DÃ­a</button>
+                                <button onclick="eliminarHistorialSemanal()" class="btn btn-warning">ðŸ“† Historial Semanal</button>
                             </div>
                         </div>
                         
                         <div style="background: var(--neutral-50); padding: 15px; border-radius: 8px; border-left: 4px solid var(--danger-color);">
-                            <h4 style="margin: 0 0 10px 0; color: var(--danger-color);">🔄 Restablecimiento de Fábrica</h4>
-                            <p style="margin: 0 0 15px 0; color: var(--neutral-600);">⚠️ <strong>ADVERTENCIA:</strong> Esta acción eliminará TODOS los datos del sistema y lo restablecerá a la configuración inicial.</p>
-                            <button onclick="restablecerTodosLosDatos()" class="btn btn-danger">🔄 Restablecer Sistema Completo</button>
+                            <h4 style="margin: 0 0 10px 0; color: var(--danger-color);">ðŸ”„ Restablecimiento de FÃ¡brica</h4>
+                            <p style="margin: 0 0 15px 0; color: var(--neutral-600);">âš ï¸ <strong>ADVERTENCIA:</strong> Esta acciÃ³n eliminarÃ¡ TODOS los datos del sistema y lo restablecerÃ¡ a la configuraciÃ³n inicial.</p>
+                            <button onclick="restablecerTodosLosDatos()" class="btn btn-danger">ðŸ”„ Restablecer Sistema Completo</button>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Gestión del Menú (Solo Administrador) -->
+            <!-- GestiÃ³n del MenÃº (Solo Administrador) -->
             <div class="panel-section" id="panelMenuAdmin" style="display: none;">
-                <h3>🍽️ Gestión del Menú (Solo Administrador)</h3>
-                <p>Configura el menú por día y categoría. Visible solo para administradores.</p>
+                <h3>ðŸ½ï¸ GestiÃ³n del MenÃº (Solo Administrador)</h3>
+                <p>Configura el menÃº por dÃ­a y categorÃ­a. Visible solo para administradores.</p>
                 
-                <!-- Selector de Día -->
+                <!-- Selector de DÃ­a -->
                 <div class="panel-section">
-                    <h3>📅 Seleccionar Día</h3>
+                    <h3>ðŸ“… Seleccionar DÃ­a</h3>
                     <div class="tabs">
                         <button class="tab active" onclick="seleccionarDia('lunes', this)">Lunes</button>
                         <button class="tab" onclick="seleccionarDia('martes', this)">Martes</button>
-                        <button class="tab" onclick="seleccionarDia('miercoles', this)">Miércoles</button>
+                        <button class="tab" onclick="seleccionarDia('miercoles', this)">MiÃ©rcoles</button>
                         <button class="tab" onclick="seleccionarDia('jueves', this)">Jueves</button>
                         <button class="tab" onclick="seleccionarDia('viernes', this)">Viernes</button>
-                        <button class="tab" onclick="seleccionarDia('sabado', this)">Sábado</button>
+                        <button class="tab" onclick="seleccionarDia('sabado', this)">SÃ¡bado</button>
                         <button class="tab" onclick="seleccionarDia('domingo', this)">Domingo</button>
                     </div>
                 </div>
                 
-                <!-- Configuración de Categorías -->
+                <!-- ConfiguraciÃ³n de CategorÃ­as -->
                 <div id="configuracionCategoriasAdmin" class="panel-section">
-                    <h3 id="tituloDia">Configuración del Menú - Lunes</h3>
+                    <h3 id="tituloDia">ConfiguraciÃ³n del MenÃº - Lunes</h3>
                     <div class="panel" style="margin-top: 10px;">
-                        <div class="panel-header" id="tituloCategoriaAdmin">Agregar al Menú - Desayuno</div>
+                        <div class="panel-header" id="tituloCategoriaAdmin">Agregar al MenÃº - Desayuno</div>
                         <div class="panel-body">
                             <div style="display:flex; gap:8px; flex-wrap: wrap; margin-bottom: 12px;">
-                                <button class="tab-cat active" data-cat="desayuno" onclick="seleccionarCategoriaMenu('desayuno')">🌅 Desayuno</button>
-                                <button class="tab-cat" data-cat="almuerzo" onclick="seleccionarCategoriaMenu('almuerzo')">🌞 Almuerzo</button>
-                                <button class="tab-cat" data-cat="cena" onclick="seleccionarCategoriaMenu('cena')">🌙 Cena</button>
+                                <button class="tab-cat active" data-cat="desayuno" onclick="seleccionarCategoriaMenu('desayuno')">ðŸŒ… Desayuno</button>
+                                <button class="tab-cat" data-cat="almuerzo" onclick="seleccionarCategoriaMenu('almuerzo')">ðŸŒž Almuerzo</button>
+                                <button class="tab-cat" data-cat="cena" onclick="seleccionarCategoriaMenu('cena')">ðŸŒ™ Cena</button>
                             </div>
                             <div class="grid grid-2">
                                 <div class="form-group">
@@ -1303,8 +1260,8 @@
                             </div>
                             <div class="grid grid-2" style="margin-top: 8px;">
                                 <div class="form-group">
-                                    <label class="form-label">Subcategoría</label>
-                                    <input type="text" id="subcategoriaMenu" class="form-control" placeholder="Ej: Económico, Ejecutivo">
+                                    <label class="form-label">SubcategorÃ­a</label>
+                                    <input type="text" id="subcategoriaMenu" class="form-control" placeholder="Ej: EconÃ³mico, Ejecutivo">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Stock</label>
@@ -1312,18 +1269,18 @@
                                 </div>
                             </div>
                             <div style="display:flex; justify-content:flex-end; margin-top: 12px;">
-                                <button onclick="agregarItemMenu()" class="btn">➕ Agregar Item</button>
+                                <button onclick="agregarItemMenu()" class="btn">âž• Agregar Item</button>
                             </div>
                         </div>
                     </div>
                     <div class="panel" style="margin-top: 10px;">
-                        <div class="panel-header">Items del Menú del Día (Admin)</div>
+                        <div class="panel-header">Items del MenÃº del DÃ­a (Admin)</div>
                         <div class="panel-body">
                             <div id="itemsAdminDia"></div>
                         </div>
                     </div>
                     <div class="panel" style="margin-top: 10px;">
-                        <div class="panel-header">🧃 Menú Fijo: Bebidas y Extras</div>
+                        <div class="panel-header">ðŸ§ƒ MenÃº Fijo: Bebidas y Extras</div>
                         <div class="panel-body">
                             <div class="grid grid-2">
                                 <div>
@@ -1344,12 +1301,12 @@
                                             <input type="number" id="stockBebidaFija" class="form-control" placeholder="Cantidad">
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Subcategoría</label>
+                                            <label class="form-label">SubcategorÃ­a</label>
                                             <input type="text" id="subcatBebidaFija" class="form-control" placeholder="Ej: Botella, Lata">
                                         </div>
                                     </div>
                                     <div style="text-align:right; margin-top:8px;">
-                                        <button class="btn" onclick="agregarItemFijo('bebidas')">➕ Agregar Bebida</button>
+                                        <button class="btn" onclick="agregarItemFijo('bebidas')">âž• Agregar Bebida</button>
                                     </div>
                                     <div style="margin-top:10px;">
                                         <strong>Listado:</strong>
@@ -1361,7 +1318,7 @@
                                     <div class="grid grid-2">
                                         <div class="form-group">
                                             <label class="form-label">Nombre</label>
-                                            <input type="text" id="nombreExtraFija" class="form-control" placeholder="Ej: Porción de papas">
+                                            <input type="text" id="nombreExtraFija" class="form-control" placeholder="Ej: PorciÃ³n de papas">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Precio</label>
@@ -1374,12 +1331,12 @@
                                             <input type="number" id="stockExtraFija" class="form-control" placeholder="Cantidad">
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Subcategoría</label>
-                                            <input type="text" id="subcatExtraFija" class="form-control" placeholder="Ej: Porción, Adicional">
+                                            <label class="form-label">SubcategorÃ­a</label>
+                                            <input type="text" id="subcatExtraFija" class="form-control" placeholder="Ej: PorciÃ³n, Adicional">
                                         </div>
                                     </div>
                                     <div style="text-align:right; margin-top:8px;">
-                                        <button class="btn" onclick="agregarItemFijo('extras')">➕ Agregar Extra</button>
+                                        <button class="btn" onclick="agregarItemFijo('extras')">âž• Agregar Extra</button>
                                     </div>
                                     <div style="margin-top:10px;">
                                         <strong>Listado:</strong>
@@ -1392,9 +1349,9 @@
                 </div>
             </div>
             
-            <!-- Información del Usuario Actual -->
+            <!-- InformaciÃ³n del Usuario Actual -->
             <div class="panel-section">
-                <h3>👤 Información del Usuario</h3>
+                <h3>ðŸ‘¤ InformaciÃ³n del Usuario</h3>
                 <div id="infoUsuarioActual" style="background: var(--neutral-50); padding: 15px; border-radius: 8px; margin-top: 15px;">
                     <p><strong>Usuario:</strong> <span id="usuarioNombre">Cargando...</span></p>
                     <p><strong>Rol:</strong> <span id="usuarioRol">Cargando...</span></p>
@@ -1402,12 +1359,12 @@
                 </div>
                 
                 <div style="text-align: center; margin-top: 20px;">
-                    <button onclick="logout()" class="btn btn-danger">🚪 Cerrar Sesión</button>
+                    <button onclick="logout()" class="btn btn-danger">ðŸšª Cerrar SesiÃ³n</button>
                 </div>
             </div>
             
             <div class="panel-section">
-                <h3>🔑 Cambio de Clave</h3>
+                <h3>ðŸ”‘ Cambio de Clave</h3>
                 <div class="grid grid-3">
                     <div class="form-group">
                         <label class="form-label">Usuario</label>
@@ -1419,18 +1376,18 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Nueva clave</label>
-                        <input type="password" id="nuevaClaveInput" class="form-control" placeholder="Nueva contraseña">
+                        <input type="password" id="nuevaClaveInput" class="form-control" placeholder="Nueva contraseÃ±a">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Confirmar clave</label>
-                        <input type="password" id="confirmarClaveInput" class="form-control" placeholder="Confirmar contraseña">
+                        <input type="password" id="confirmarClaveInput" class="form-control" placeholder="Confirmar contraseÃ±a">
                     </div>
                 </div>
                 <div style="text-align:right; margin-top:10px;">
-                    <button class="btn" onclick="aplicarCambioClave()">💾 Cambiar clave</button>
+                    <button class="btn" onclick="aplicarCambioClave()">ðŸ’¾ Cambiar clave</button>
                 </div>
                 <div style="margin-top:8px; color: var(--neutral-600); font-size:0.85rem;">
-                    La clave se actualiza localmente y remotamente si Firebase está disponible.
+                    La clave se actualiza localmente y remotamente si Firebase estÃ¡ disponible.
                 </div>
             </div>
         </div>
@@ -1462,7 +1419,7 @@
 
         function initVoz() {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                console.warn('🎙️ El reconocimiento de voz no es compatible con este navegador.');
+                console.warn('ðŸŽ™ï¸ El reconocimiento de voz no es compatible con este navegador.');
                 const btn = document.getElementById('btnAsistenteVoz');
                 if (btn) btn.style.display = 'none';
                 return;
@@ -1492,7 +1449,7 @@
             };
 
             recognition.onerror = (event) => {
-                console.error('❌ Error de reconocimiento:', event.error);
+                console.error('âŒ Error de reconocimiento:', event.error);
                 setStatusVoz(`Error: ${event.error}`);
                 isListening = false;
                 updateVoiceUI();
@@ -1511,7 +1468,7 @@
                 try {
                     recognition.start();
                 } catch (e) {
-                    console.error('⚠️ Error al iniciar voz:', e);
+                    console.error('âš ï¸ Error al iniciar voz:', e);
                 }
             }
         }
@@ -1525,12 +1482,12 @@
             
             if (isListening) {
                 btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
-                if (icon) icon.textContent = '🛑';
+                if (icon) icon.textContent = 'ðŸ›‘';
                 if (text) text.textContent = 'Detener Asistente';
                 btn.classList.add('pulse-animation');
             } else {
                 btn.style.background = 'linear-gradient(135deg, #6366f1, #4f46e5)';
-                if (icon) icon.textContent = '🎙️';
+                if (icon) icon.textContent = 'ðŸŽ™ï¸';
                 if (text) text.textContent = 'Asistente de Voz';
                 btn.classList.remove('pulse-animation');
             }
@@ -1551,7 +1508,7 @@
         }
 
         function procesarComandoVoz(input) {
-            addDebugLog(`🎙️ Procesando voz: ${input}`);
+            addDebugLog(`ðŸŽ™ï¸ Procesando voz: ${input}`);
             
             // Regex patterns
             const regexMesa = /(?:mesa|meza)\s+(\d+)/;
@@ -1569,20 +1526,20 @@
                 paraLlevarGlobal = true;
             }
 
-            // Separar comandos por conectores comunes (y, con, además)
-            // Pero ignorar "con" si es parte de una acotación (ej: con sal)
-            const partes = input.split(/\s+y\s+|\s+ademas\s+|\s+además\s+/);
+            // Separar comandos por conectores comunes (y, con, ademÃ¡s)
+            // Pero ignorar "con" si es parte de una acotaciÃ³n (ej: con sal)
+            const partes = input.split(/\s+y\s+|\s+ademas\s+|\s+ademÃ¡s\s+/);
             let productosAgregados = 0;
 
             partes.forEach(parte => {
                 let texto = parte.trim();
                 if (!texto) return;
 
-                // Limpiar referencia a mesa/llevar de la parte individual si ya se detectó globalmente
+                // Limpiar referencia a mesa/llevar de la parte individual si ya se detectÃ³ globalmente
                 if (mesaGlobal) texto = texto.replace(regexMesa, '');
                 if (paraLlevarGlobal) texto = texto.replace(regexParaLlevar, '');
 
-                // Detectar Cantidad específica de esta parte
+                // Detectar Cantidad especÃ­fica de esta parte
                 let cantidad = 1;
                 const matchCantidad = texto.match(regexCantidad);
                 if (matchCantidad) {
@@ -1590,7 +1547,7 @@
                     texto = texto.replace(matchCantidad[0], '');
                 }
 
-                // Extraer Acotación
+                // Extraer AcotaciÃ³n
                 let acotacion = "";
                 const acotacionKeywords = [" sin ", " con ", " poco ", " extra ", " solo "];
                 for (let kw of acotacionKeywords) {
@@ -1608,7 +1565,7 @@
 
                 if (!productoBuscado) return;
 
-                // Buscar Producto (Mejorado con búsqueda por palabras clave)
+                // Buscar Producto (Mejorado con bÃºsqueda por palabras clave)
                 const menuDelDia = obtenerMenuDelDia();
                 let encontrado = null;
                 let mejorCoincidencia = -1;
@@ -1621,17 +1578,17 @@
                             encontrado = { ...item, categoria };
                             mejorCoincidencia = 100;
                         } 
-                        // 2. Contiene el término buscado (ej: "cau" en "cau cau")
+                        // 2. Contiene el tÃ©rmino buscado (ej: "cau" en "cau cau")
                         else if (nombreL.includes(productoBuscado) && mejorCoincidencia < 50) {
                             encontrado = { ...item, categoria };
                             mejorCoincidencia = 50;
                         }
-                        // 3. El término buscado contiene el nombre (ej: "lomo" en "lomo saltado")
+                        // 3. El tÃ©rmino buscado contiene el nombre (ej: "lomo" en "lomo saltado")
                         else if (productoBuscado.includes(nombreL) && mejorCoincidencia < 40) {
                             encontrado = { ...item, categoria };
                             mejorCoincidencia = 40;
                         }
-                        // 4. Búsqueda por palabras individuales (mínimo 3 letras)
+                        // 4. BÃºsqueda por palabras individuales (mÃ­nimo 3 letras)
                         else if (productoBuscado.length >= 3) {
                             const palabrasBuscadas = productoBuscado.split(' ');
                             const palabrasNombre = nombreL.split(' ');
@@ -1651,8 +1608,8 @@
 
                 if (encontrado) {
                     if (!paraLlevarGlobal && !mesaGlobal) {
-                        hablar(`¿Para qué mesa es el ${encontrado.nombre}?`);
-                        setStatusVoz(`⚠️ Falta indicar la mesa para: ${encontrado.nombre}`);
+                        hablar(`Â¿Para quÃ© mesa es el ${encontrado.nombre}?`);
+                        setStatusVoz(`âš ï¸ Falta indicar la mesa para: ${encontrado.nombre}`);
                         return;
                     }
 
@@ -1680,7 +1637,7 @@
                     agregarProducto();
                     productosAgregados++;
                 } else {
-                    setStatusVoz(`❌ No encontré: ${productoBuscado}`);
+                    setStatusVoz(`âŒ No encontrÃ©: ${productoBuscado}`);
                 }
             });
 
@@ -1696,7 +1653,7 @@
             if (chk) {
                 configVoz.respuestaVoz = chk.checked;
                 localStorage.setItem('tarante_config_voz', JSON.stringify(configVoz));
-                addDebugLog(`🎙️ Respuesta por voz: ${configVoz.respuestaVoz ? 'ON' : 'OFF'}`);
+                addDebugLog(`ðŸŽ™ï¸ Respuesta por voz: ${configVoz.respuestaVoz ? 'ON' : 'OFF'}`);
             }
         }
 
@@ -1731,9 +1688,9 @@
         function inicializarAudio() {
             try {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                console.log('🔊 Audio inicializado');
+                console.log('ðŸ”Š Audio inicializado');
             } catch (error) {
-                console.log('⚠️ Audio no disponible:', error);
+                console.log('âš ï¸ Audio no disponible:', error);
                 sonidoActivo = false;
             }
         }
@@ -1755,11 +1712,11 @@
                 osc.start();
                 osc.stop(audioContext.currentTime + duracion / 1000);
             } catch (error) {
-                console.log('⚠️ Error sonido:', error);
+                console.log('âš ï¸ Error sonido:', error);
             }
         }
         
-        // Sonidos específicos
+        // Sonidos especÃ­ficos
         function sonidoAgregarProducto() {
             if (configuracionesSonido.agregarProducto) {
                 reproducirSonido(800, 150);
@@ -1791,16 +1748,16 @@
             }
         }
         
-        // ============ GESTIÓN DE CONFIGURACIÓN ============
+        // ============ GESTIÃ“N DE CONFIGURACIÃ“N ============
         function cambiarConfiguracionSonido(tipo, habilitado) {
             configuracionesSonido[tipo] = habilitado;
             
             // Guardar en localStorage
             try {
                 localStorage.setItem('fenix_sonidos_config', JSON.stringify(configuracionesSonido));
-                console.log(`🔊 Sonido ${tipo} ${habilitado ? 'activado' : 'desactivado'}`);
+                console.log(`ðŸ”Š Sonido ${tipo} ${habilitado ? 'activado' : 'desactivado'}`);
             } catch (error) {
-                console.log('⚠️ Error guardando configuración:', error);
+                console.log('âš ï¸ Error guardando configuraciÃ³n:', error);
             }
         }
         
@@ -1810,9 +1767,9 @@
                 if (configGuardada) {
                     configuracionesSonido = { ...configuracionesSonido, ...JSON.parse(configGuardada) };
                 }
-                console.log('🔊 Configuración de sonidos cargada');
+                console.log('ðŸ”Š ConfiguraciÃ³n de sonidos cargada');
             } catch (error) {
-                console.log('⚠️ Error cargando configuración:', error);
+                console.log('âš ï¸ Error cargando configuraciÃ³n:', error);
             }
         }
         
@@ -1914,11 +1871,11 @@
                             if (usr) usr.password = data[u].password;
                         }
                     });
-                    addDebugLog('📂 Usuarios cargados desde localStorage');
+                    addDebugLog('ðŸ“‚ Usuarios cargados desde localStorage');
                 }
             } catch (_) {}
         }
-        // Menú semanal
+        // MenÃº semanal
         let menuSemanal = {
             lunes: { desayuno: [], almuerzo: [], cena: [] },
             martes: { desayuno: [], almuerzo: [], cena: [] },
@@ -1935,14 +1892,14 @@
         }
 
         // ============ FUNCIONES DE PERMISOS ============
-        // Función para obtener usuario por credenciales
+        // FunciÃ³n para obtener usuario por credenciales
         function obtenerUsuario(username, password) {
             return usuariosDelSistema.find(usuario => 
                 usuario.username === username && usuario.password === password
             );
         }
 
-        // Función para verificar permisos
+        // FunciÃ³n para verificar permisos
         function tienePermiso(permiso) {
             if (!currentUser) return false;
             if (currentUser.permisos && typeof currentUser.permisos[permiso] !== 'undefined') {
@@ -1958,7 +1915,7 @@
             return false;
         }
 
-        // Función para verificar permisos específicos de rol (legacy)
+        // FunciÃ³n para verificar permisos especÃ­ficos de rol (legacy)
         function verificarPermisos(rolPermitido) {
             if (!currentUser) return false;
             if (rolPermitido === 'admin') return currentUser.role === 'admin';
@@ -1967,17 +1924,17 @@
             return false;
         }
 
-        // Función para cambiar permisos de un usuario
+        // FunciÃ³n para cambiar permisos de un usuario
         function cambiarPermiso(username, permiso, valor) {
             if (!tienePermiso('gestionarPermisos')) {
-                alert('❌ No tienes permisos para gestionar permisos');
+                alert('âŒ No tienes permisos para gestionar permisos');
                 return;
             }
             
             const usuario = usuariosDelSistema.find(u => u.username === username);
             if (usuario) {
                 usuario.permisos[permiso] = valor;
-                addDebugLog(`✅ Permiso "${permiso}" ${valor ? 'activado' : 'desactivado'} para ${username}`);
+                addDebugLog(`âœ… Permiso "${permiso}" ${valor ? 'activado' : 'desactivado'} para ${username}`);
                 
                 // Si es el usuario actual, actualizar currentUser
                 if (currentUser.username === username) {
@@ -1997,20 +1954,20 @@
             const nueva = nuevaEl ? nuevaEl.value : '';
             const conf = confEl ? confEl.value : '';
             if (!username || !nueva || !conf) {
-                alert('⚠️ Completa todos los campos');
+                alert('âš ï¸ Completa todos los campos');
                 return;
             }
             if (nueva !== conf) {
-                alert('⚠️ Las claves no coinciden');
+                alert('âš ï¸ Las claves no coinciden');
                 return;
             }
             if (!(tienePermiso('gestionarPermisos') || (currentUser && currentUser.username === username))) {
-                alert('❌ No tienes permisos para cambiar esta clave');
+                alert('âŒ No tienes permisos para cambiar esta clave');
                 return;
             }
             const usr = usuariosDelSistema.find(u => u.username === username);
             if (!usr) {
-                alert('❌ Usuario no encontrado');
+                alert('âŒ Usuario no encontrado');
                 return;
             }
             usr.password = nueva;
@@ -2025,18 +1982,18 @@
                         password: nueva,
                         updatedAt: new Date()
                     }, { merge: true }).then(() => {
-                        addDebugLog(`🔥 Clave actualizada para ${username}`);
-                        alert('✅ Clave actualizada');
+                        addDebugLog(`ðŸ”¥ Clave actualizada para ${username}`);
+                        alert('âœ… Clave actualizada');
                     }).catch((error) => {
-                        console.error('❌ Error actualizando clave en Firebase:', error);
-                        alert('⚠️ Clave actualizada localmente. Firebase no disponible.');
+                        console.error('âŒ Error actualizando clave en Firebase:', error);
+                        alert('âš ï¸ Clave actualizada localmente. Firebase no disponible.');
                     });
                 } else {
-                    alert('✅ Clave actualizada localmente');
+                    alert('âœ… Clave actualizada localmente');
                 }
             } catch (error) {
-                console.error('❌ Error cambiando clave:', error);
-                alert('⚠️ Error cambiando clave');
+                console.error('âŒ Error cambiando clave:', error);
+                alert('âš ï¸ Error cambiando clave');
             }
             if (nuevaEl) nuevaEl.value = '';
             if (confEl) confEl.value = '';
@@ -2051,19 +2008,19 @@
                         permisos: usuario.permisos,
                         updatedAt: new Date()
                     }, { merge: true }).then(() => {
-                        addDebugLog(`🔥 Permisos guardados remotamente para ${username}`);
+                        addDebugLog(`ðŸ”¥ Permisos guardados remotamente para ${username}`);
                     }).catch((error) => {
-                        console.error('❌ Error guardando permisos remoto:', error);
+                        console.error('âŒ Error guardando permisos remoto:', error);
                     });
                 }
             } catch (error) {
-                console.error('❌ Error en guardarPermisosUsuarioRemoto:', error);
+                console.error('âŒ Error en guardarPermisosUsuarioRemoto:', error);
             }
         }
 
-        // Actualizar información del usuario en la interfaz
+        // Actualizar informaciÃ³n del usuario en la interfaz
         function actualizarInfoUsuario() {
-            // Actualizar información en la vista de perfil (solo si existen los elementos)
+            // Actualizar informaciÃ³n en la vista de perfil (solo si existen los elementos)
             const usuarioNombre = document.getElementById('usuarioNombre');
             const usuarioRol = document.getElementById('usuarioRol');
             const permisosActivos = document.getElementById('permisosActivos');
@@ -2094,7 +2051,7 @@
                 }
             }
             
-            // Mostrar/ocultar panel de permisos según permisos del usuario
+            // Mostrar/ocultar panel de permisos segÃºn permisos del usuario
             if (panelPermisosSection) {
                 if (tienePermiso && tienePermiso('gestionarPermisos')) {
                     panelPermisosSection.style.display = 'block';
@@ -2105,12 +2062,12 @@
             }
         }
 
-        // ============ SISTEMA DE INFORMES Y ESTADÍSTICAS ============
+        // ============ SISTEMA DE INFORMES Y ESTADÃSTICAS ============
         function actualizarVistaInformes() {
-            // Actualizar estadísticas generales
+            // Actualizar estadÃ­sticas generales
             actualizarEstadisticasGenerales();
             
-            // Generar datos para gráficos
+            // Generar datos para grÃ¡ficos
             generarDatosGraficos();
             
             // Actualizar tabla de rendimiento
@@ -2118,11 +2075,11 @@
             
             renderAcotacionesDelDia();
             
-            console.log('📊 Vista de informes actualizada');
+            console.log('ðŸ“Š Vista de informes actualizada');
         }
 
         function actualizarEstadisticasGenerales() {
-            // Calcular estadísticas desde los datos del sistema
+            // Calcular estadÃ­sticas desde los datos del sistema
             const totalVentas = ventasHoy;
             const mesasActivas = mesas.filter(m => m.estado === 'activa').length;
             const totalPedidos = pedidosCocina.length + carritoComandas.length;
@@ -2153,7 +2110,7 @@
             const resumenCategorias = {};
             let productoMasVendido = { nombre: '-', cantidad: 0 };
             
-            // Recalcular métricas base desde historial para asegurar consistencia
+            // Recalcular mÃ©tricas base desde historial para asegurar consistencia
             recomputarMetricasInformes();
             
             historialCobrosHoy.forEach(cobro => {
@@ -2170,7 +2127,7 @@
             const datosMesas = Object.entries(resumenMesas).map(([mesa, ventas]) => ({ mesa: parseInt(mesa), pedidos: 0, ventas }));
             const datosCategorias = Object.entries(resumenCategorias).map(([categoria, ventas]) => ({ categoria, ventas, pedidos: 0 }));
 
-            // Actualizar información textual
+            // Actualizar informaciÃ³n textual
             const mesaTop = document.getElementById('mesaTop');
             const productoTop = document.getElementById('productoTop');
             const tiempoPromedio = document.getElementById('tiempoPromedio');
@@ -2198,7 +2155,7 @@
                 tiempoPromedio.textContent = tiempos.length ? `${promedio.toFixed(1)} min` : '-';
             }
 
-            // Generar gráficos simples con CSS
+            // Generar grÃ¡ficos simples con CSS
             generarGraficoMesas(datosMesas);
             generarGraficoCategorias(datosCategorias);
         }
@@ -2320,7 +2277,7 @@
                 html += `
                     <div style="border:1px solid var(--neutral-200); border-left:4px solid var(--warning-color); padding:10px; border-radius:6px; background:#fff8e1;">
                         <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <strong>🪑 Mesa ${a.mesa}</strong>
+                            <strong>ðŸª‘ Mesa ${a.mesa}</strong>
                             <small style="color: var(--neutral-700);">${hh}:${mm}</small>
                         </div>
                         <div style="margin-top:6px; font-style: italic; color:#6b4f00; font-weight:600;">${a.texto}</div>
@@ -2334,7 +2291,7 @@
         // Cargar panel de permisos (solo para administradores)
         function cargarPanelPermisos() {
             if (!tienePermiso('gestionarPermisos')) {
-                console.log('❌ Acceso denegado al panel de permisos');
+                console.log('âŒ Acceso denegado al panel de permisos');
                 return;
             }
             
@@ -2360,7 +2317,7 @@
                 
                 usuarioDiv.innerHTML = `
                     <h4 style="margin: 0 0 15px 0; color: var(--primary-color);">
-                        👤 ${usuario.nombre} (${usuario.username})
+                        ðŸ‘¤ ${usuario.nombre} (${usuario.username})
                     </h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
                         ${permisosTabs.map((permiso) => `
@@ -2380,16 +2337,16 @@
             });
         }
 
-        // ============ SISTEMA DE AUTENTICACIÓN ============
+        // ============ SISTEMA DE AUTENTICACIÃ“N ============
         function login() {
             const usuario = document.getElementById('loginUser').value;
-            const contraseña = document.getElementById('loginPass').value;
+            const contraseÃ±a = document.getElementById('loginPass').value;
 
             // Verificar credenciales en el sistema de usuarios
-            const usuarioValido = obtenerUsuario(usuario, contraseña);
+            const usuarioValido = obtenerUsuario(usuario, contraseÃ±a);
 
             if (usuarioValido) {
-                // Actualizar currentUser con información completa
+                // Actualizar currentUser con informaciÃ³n completa
                 currentUser = {
                     username: usuarioValido.username,
                     role: usuarioValido.role,
@@ -2400,16 +2357,16 @@
                 // Guardar permisos en localStorage
                 localStorage.setItem('fenix_permisos_usuario', JSON.stringify(currentUser.permisos));
                 
-                // Iniciar sincronización de usuarios en tiempo real
+                // Iniciar sincronizaciÃ³n de usuarios en tiempo real
                 iniciarListenerUsuarios();
                 
-                // Ocultar login y mostrar aplicación
+                // Ocultar login y mostrar aplicaciÃ³n
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('navContainer').style.display = 'block';
                 document.getElementById('mainContainer').style.display = 'block';
                 document.getElementById('loader').style.display = 'none';
                 
-                // Configurar acceso según permisos
+                // Configurar acceso segÃºn permisos
                 configurarAccesoPorPermisos();
                 actualizarInfoUsuario();
                 
@@ -2419,13 +2376,13 @@
                 // Iniciar reloj y fecha
                 iniciarReloj();
 
-                // Log de éxito (sin addDebugLog para evitar errores)
-                console.log(`✅ Usuario ${usuarioValido.nombre} (${usuarioValido.role}) autenticado exitosamente`);
+                // Log de Ã©xito (sin addDebugLog para evitar errores)
+                console.log(`âœ… Usuario ${usuarioValido.nombre} (${usuarioValido.role}) autenticado exitosamente`);
                 
-                alert(`¡Bienvenido ${usuarioValido.nombre}!`);
+                alert(`Â¡Bienvenido ${usuarioValido.nombre}!`);
             } else {
-                alert('❌ Usuario o contraseña incorrectos');
-                console.log(`❌ Fallo de autenticación para usuario: ${usuario}`);
+                alert('âŒ Usuario o contraseÃ±a incorrectos');
+                console.log(`âŒ Fallo de autenticaciÃ³n para usuario: ${usuario}`);
             }
         }
 
@@ -2476,11 +2433,11 @@
             return vistasOrden.find(vista => puedeVerVista(vista)) || 'configuracion';
         }
 
-        // Configurar acceso a funcionalidades según permisos
+        // Configurar acceso a funcionalidades segÃºn permisos
         function configurarAccesoPorPermisos() {
             if (!currentUser) return;
 
-            // Ocultar/mostrar elementos del nav según permisos
+            // Ocultar/mostrar elementos del nav segÃºn permisos
             const vistas = ['dashboard', 'comandas', 'cocina', 'cuentas', 'menu', 'informes', 'configuracion'];
             vistas.forEach(v => {
                 const item = document.querySelector(`li[data-view="${v}"]`);
@@ -2531,7 +2488,7 @@
         }
 
         function logout() {
-            // Detener listener de usuarios si está activo
+            // Detener listener de usuarios si estÃ¡ activo
             if (window.listenerUsuariosActivo) {
                 window.listenerUsuariosActivo();
                 window.listenerUsuariosActivo = null;
@@ -2546,7 +2503,7 @@
             document.getElementById('navContainer').style.display = 'none';
             document.getElementById('mainContainer').style.display = 'none';
             
-            addDebugLog('🔓 Usuario desconectado');
+            addDebugLog('ðŸ”“ Usuario desconectado');
         }
 
         // ============ NOTIFICACIONES ============
@@ -2562,28 +2519,28 @@
             toast.className = `toast ${type}`;
             toast.textContent = message;
             
-            // Icono según tipo
+            // Icono segÃºn tipo
             const icon = document.createElement('span');
             icon.style.marginRight = '10px';
-            if (type === 'success') icon.textContent = '✅';
-            if (type === 'error') icon.textContent = '❌';
-            if (type === 'warning') icon.textContent = '⚠️';
-            if (type === 'info') icon.textContent = 'ℹ️';
+            if (type === 'success') icon.textContent = 'âœ…';
+            if (type === 'error') icon.textContent = 'âŒ';
+            if (type === 'warning') icon.textContent = 'âš ï¸';
+            if (type === 'info') icon.textContent = 'â„¹ï¸';
             toast.prepend(icon);
 
             container.appendChild(toast);
             
-            // Eliminar elemento del DOM después de la animación
+            // Eliminar elemento del DOM despuÃ©s de la animaciÃ³n
             setTimeout(() => {
                 if (toast.parentNode) toast.parentNode.removeChild(toast);
             }, 4500);
         }
 
-        // ============ SINCRONIZACIÓN DE USUARIOS EN TIEMPO REAL ============
+        // ============ SINCRONIZACIÃ“N DE USUARIOS EN TIEMPO REAL ============
         function iniciarListenerUsuarios() {
-            // Verificar que Firebase esté disponible
+            // Verificar que Firebase estÃ© disponible
             if (!window.db || !window.firebase) {
-                addDebugLog('⚠️ Firebase no disponible para listener de usuarios');
+                addDebugLog('âš ï¸ Firebase no disponible para listener de usuarios');
                 return;
             }
 
@@ -2593,7 +2550,7 @@
                     window.listenerUsuariosActivo();
                 }
 
-                // Crear listener para la colección 'usuarios'
+                // Crear listener para la colecciÃ³n 'usuarios'
                 const listener = window.db.collection('usuarios').onSnapshot(
                     (snapshot) => {
                         snapshot.docChanges().forEach((change) => {
@@ -2606,8 +2563,8 @@
                                     if (usuarioModificado.permisos) {
                                         currentUser.permisos = usuarioModificado.permisos;
                                         localStorage.setItem('fenix_permisos_usuario', JSON.stringify(usuarioModificado.permisos));
-                                        addDebugLog(`🔄 Permisos sincronizados para ${usuarioId}`);
-                                        console.log('✅ Permisos actualizados en tiempo real:', currentUser.permisos);
+                                        addDebugLog(`ðŸ”„ Permisos sincronizados para ${usuarioId}`);
+                                        console.log('âœ… Permisos actualizados en tiempo real:', currentUser.permisos);
                                         configurarAccesoPorPermisos();
                                     }
                                     if (usuarioModificado.password) {
@@ -2616,33 +2573,33 @@
                                         const almacen = JSON.parse(localStorage.getItem('fenix_usuarios') || '{}');
                                         almacen[usuarioId] = { password: usuarioModificado.password };
                                         localStorage.setItem('fenix_usuarios', JSON.stringify(almacen));
-                                        addDebugLog(`🔄 Clave sincronizada para ${usuarioId}`);
+                                        addDebugLog(`ðŸ”„ Clave sincronizada para ${usuarioId}`);
                                     }
                                 }
                             }
                         });
                     },
                     (error) => {
-                        console.error('❌ Error en listener de usuarios:', error);
-                        addDebugLog(`❌ Error listener usuarios: ${error.message}`);
+                        console.error('âŒ Error en listener de usuarios:', error);
+                        addDebugLog(`âŒ Error listener usuarios: ${error.message}`);
                     }
                 );
 
-                // Guardar función para poder detener el listener
+                // Guardar funciÃ³n para poder detener el listener
                 window.listenerUsuariosActivo = listener;
-                addDebugLog('👥 Listener de usuarios iniciado');
+                addDebugLog('ðŸ‘¥ Listener de usuarios iniciado');
 
             } catch (error) {
-                console.error('❌ Error al iniciar listener de usuarios:', error);
-                addDebugLog(`⚠️ No se pudo iniciar listener de usuarios: ${error.message}`);
+                console.error('âŒ Error al iniciar listener de usuarios:', error);
+                addDebugLog(`âš ï¸ No se pudo iniciar listener de usuarios: ${error.message}`);
             }
         }
 
-        // ============ SINCRONIZACIÓN DE MENÚ EN TIEMPO REAL ============
+        // ============ SINCRONIZACIÃ“N DE MENÃš EN TIEMPO REAL ============
         function iniciarListenerMenu() {
-            // Verificar que Firebase esté disponible
+            // Verificar que Firebase estÃ© disponible
             if (!window.db || !window.firebase) {
-                addDebugLog('⚠️ Firebase no disponible para listener de menú');
+                addDebugLog('âš ï¸ Firebase no disponible para listener de menÃº');
                 return;
             }
 
@@ -2652,25 +2609,25 @@
                     window.listenerMenuActivo();
                 }
 
-                // Crear listener para la colección 'menu'
+                // Crear listener para la colecciÃ³n 'menu'
                 const listener = window.db.collection('menu').onSnapshot(
                     (snapshot) => {
                         snapshot.docChanges().forEach((change) => {
                             if (change.type === 'added' || change.type === 'modified') {
                                 const menuData = change.doc.data();
                                 
-                                // Actualizar menú local si hay cambios
+                                // Actualizar menÃº local si hay cambios
                                 if (menuData.semanal) {
                                     menuSemanal = menuData.semanal;
                                     localStorage.setItem('fenix_menu_semanal', JSON.stringify(menuSemanal));
-                                    addDebugLog(`🔄 Menú semanal sincronizado desde Firebase (${change.type})`);
-                                    console.log('✅ Menú semanal actualizado en tiempo real:', menuSemanal);
+                                    addDebugLog(`ðŸ”„ MenÃº semanal sincronizado desde Firebase (${change.type})`);
+                                    console.log('âœ… MenÃº semanal actualizado en tiempo real:', menuSemanal);
                                     
                                     if (change.type === 'modified') {
-                                        showNotification('Menú actualizado remotamente', 'info');
+                                        showNotification('MenÃº actualizado remotamente', 'info');
                                     }
 
-                                    // Actualizar vista de comandas si está activa
+                                    // Actualizar vista de comandas si estÃ¡ activa
                                     if (typeof cargarProductosDelMenu === 'function') {
                                         cargarProductosDelMenu();
                                         // Si estamos en la vista de comandas, mostrar aviso extra
@@ -2678,19 +2635,19 @@
                                             showNotification('Lista de productos actualizada', 'success');
                                         }
                                     }
-                                    // Actualizar vista de menú admin si está activa
+                                    // Actualizar vista de menÃº admin si estÃ¡ activa
                                     if (typeof actualizarVistaDia === 'function' && typeof diaSeleccionado !== 'undefined') actualizarVistaDia(diaSeleccionado);
                                 }
                                 if (menuData.fijo) {
                                     menuFijo = menuData.fijo;
                                     localStorage.setItem('fenix_menu_fijo', JSON.stringify(menuFijo));
-                                    addDebugLog(`🔄 Menú fijo sincronizado desde Firebase (${change.type})`);
+                                    addDebugLog(`ðŸ”„ MenÃº fijo sincronizado desde Firebase (${change.type})`);
                                     
                                     // Actualizar vistas relevantes
                                     if (typeof cargarProductosDelMenu === 'function') {
                                         cargarProductosDelMenu();
                                         if (document.getElementById('comandasView').classList.contains('active') && change.type === 'modified') {
-                                            showNotification('Menú fijo actualizado', 'info');
+                                            showNotification('MenÃº fijo actualizado', 'info');
                                         }
                                     }
                                     if (typeof renderMenuFijoListados === 'function') renderMenuFijoListados();
@@ -2699,24 +2656,24 @@
                         });
                     },
                     (error) => {
-                        console.error('❌ Error en listener de menú:', error);
-                        addDebugLog(`❌ Error listener menú: ${error.message}`);
+                        console.error('âŒ Error en listener de menÃº:', error);
+                        addDebugLog(`âŒ Error listener menÃº: ${error.message}`);
                     }
                 );
 
-                // Guardar función para poder detener el listener
+                // Guardar funciÃ³n para poder detener el listener
                 window.listenerMenuActivo = listener;
-                addDebugLog('🍽️ Listener de menú iniciado');
+                addDebugLog('ðŸ½ï¸ Listener de menÃº iniciado');
 
             } catch (error) {
-                console.error('❌ Error al iniciar listener de menú:', error);
-                addDebugLog(`⚠️ No se pudo iniciar listener de menú: ${error.message}`);
+                console.error('âŒ Error al iniciar listener de menÃº:', error);
+                addDebugLog(`âš ï¸ No se pudo iniciar listener de menÃº: ${error.message}`);
             }
         }
         
         function iniciarListenerSistema() {
             if (!window.db || !window.firebase) {
-                addDebugLog('⚠️ Firebase no disponible para listener de sistema');
+                addDebugLog('âš ï¸ Firebase no disponible para listener de sistema');
                 return;
             }
             try {
@@ -2760,10 +2717,10 @@
                                 const lastLocalReset = localStorage.getItem('fenix_last_reset');
                                 
                                 if (!lastLocalReset || new Date(lastLocalReset) < resetTime) {
-                                    addDebugLog('⚠️ Detectado restablecimiento de fábrica remoto. Limpiando datos locales...');
+                                    addDebugLog('âš ï¸ Detectado restablecimiento de fÃ¡brica remoto. Limpiando datos locales...');
                                     localStorage.setItem('fenix_last_reset', resetTime.toISOString());
                                     
-                                    // Limpiar datos locales que no se sincronizan automáticamente
+                                    // Limpiar datos locales que no se sincronizan automÃ¡ticamente
                                     ventasHoy = 0;
                                     transaccionesHoy = 0;
                                     ventasEfectivoHoy = 0;
@@ -2803,9 +2760,9 @@
                             actualizarDashboard();
                             if (typeof actualizarVistaInformes === 'function') actualizarVistaInformes();
                             if (typeof actualizarVistaDia === 'function') actualizarVistaDia(diaSeleccionado);
-                            addDebugLog(`🔁 Estado sincronizado: mesas=${mesas.length}, cocina=${pedidosCocina.length}, cuentas=${cuentasPendientes.length}, seq=${lastRemoteSeq}`);
+                            addDebugLog(`ðŸ” Estado sincronizado: mesas=${mesas.length}, cocina=${pedidosCocina.length}, cuentas=${cuentasPendientes.length}, seq=${lastRemoteSeq}`);
                         } catch (err) {
-                            console.error('❌ Error procesando actualización:', err);
+                            console.error('âŒ Error procesando actualizaciÃ³n:', err);
                         } finally {
                             sincronizandoRemoto = false;
                             if (pendienteGuardado) {
@@ -2815,19 +2772,19 @@
                         }
                     },
                     (error) => {
-                        console.error('❌ Error en listener de sistema:', error);
-                        addDebugLog(`❌ Error listener sistema: ${error.message}`);
+                        console.error('âŒ Error en listener de sistema:', error);
+                        addDebugLog(`âŒ Error listener sistema: ${error.message}`);
                     }
                 );
                 window.listenerSistemaActivo = listener;
-                addDebugLog('🔁 Listener de sistema iniciado');
+                addDebugLog('ðŸ” Listener de sistema iniciado');
             } catch (error) {
-                console.error('❌ Error al iniciar listener de sistema:', error);
-                addDebugLog(`⚠️ No se pudo iniciar listener de sistema: ${error.message}`);
+                console.error('âŒ Error al iniciar listener de sistema:', error);
+                addDebugLog(`âš ï¸ No se pudo iniciar listener de sistema: ${error.message}`);
             }
         }
 
-        // ============ NAVEGACIÓN ============
+        // ============ NAVEGACIÃ“N ============
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const viewName = this.getAttribute('data-view');
@@ -2856,7 +2813,7 @@
             // Mostrar la vista seleccionada
             targetView.classList.add('active');
             
-            // Actualizar navegación
+            // Actualizar navegaciÃ³n
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
@@ -2864,11 +2821,11 @@
             document.body.className = document.body.className.replace(/view-\w+/g, '').trim();
             document.body.classList.add(`view-${viewName}`);
             
-            // Cargar datos específicos de la vista
+            // Cargar datos especÃ­ficos de la vista
             if (viewName === 'comandas') {
                 setTimeout(() => {
                     cargarProductosDelMenu();
-                    addDebugLog('🍽️ Productos del menú cargados en comandas');
+                    addDebugLog('ðŸ½ï¸ Productos del menÃº cargados en comandas');
                 }, 100);
             } else if (viewName === 'cocina') {
                 actualizarVistaCocina();
@@ -2891,10 +2848,10 @@
                 renderMenuFijoListados();
             }
             
-            addDebugLog(`✅ Vista ${viewName} activada`);
+            addDebugLog(`âœ… Vista ${viewName} activada`);
         }
 
-        // ============ INICIALIZACIÓN ============
+        // ============ INICIALIZACIÃ“N ============
         function inicializarSistema() {
             cargarUsuarios();
             cargarMenuSemanal();
@@ -2903,7 +2860,7 @@
             actualizarMesasCocina();
             actualizarDashboard();
             
-            // Configurar acceso según permisos del usuario
+            // Configurar acceso segÃºn permisos del usuario
             if (currentUser) {
                 configurarAccesoPorPermisos();
             }
@@ -2913,22 +2870,22 @@
             cargarConfiguracionSonidos();
             renderMenuFijoListados();
             
-            // Iniciar sincronización de menú en tiempo real
+            // Iniciar sincronizaciÃ³n de menÃº en tiempo real
             iniciarListenerMenu();
             
-            addDebugLog('🚀 Sistema FENIX inicializado correctamente');
+            addDebugLog('ðŸš€ Sistema FENIX inicializado correctamente');
         }
 
         function hideLoader() {
             setTimeout(() => {
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('loginContainer').style.display = 'flex';
-                addDebugLog('🔄 Loader ocultado, mostrando login');
+                addDebugLog('ðŸ”„ Loader ocultado, mostrando login');
             }, 2000);
         }
 
         // ============ SISTEMA DE MESAS ============
-        // Función auxiliar para obtener platos de una mesa
+        // FunciÃ³n auxiliar para obtener platos de una mesa
         function obtenerPlatosDeMesa(numeroMesa) {
             const platos = [];
             
@@ -2988,8 +2945,8 @@
                 if (platos.length > 0) {
                     platosHtml = '<div style="margin-top: 8px; padding: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; max-height: 80px; overflow-y: auto;">';
                     platos.forEach(plato => {
-                        const acotacionesText = plato.acotaciones ? `<br><span style="display:inline-block; margin-top:3px; background:#fff59d; color:#111; padding:2px 6px; border-radius:6px; font-weight:700;">📝 ${plato.acotaciones}</span>` : '';
-                        platosHtml += `<div style="font-size: 0.7rem; margin-bottom: 2px;">🍽️ ${plato.cantidad}x ${plato.nombre}${acotacionesText}</div>`;
+                        const acotacionesText = plato.acotaciones ? `<br><span style="display:inline-block; margin-top:3px; background:#fff59d; color:#111; padding:2px 6px; border-radius:6px; font-weight:700;">ðŸ“ ${plato.acotaciones}</span>` : '';
+                        platosHtml += `<div style="font-size: 0.7rem; margin-bottom: 2px;">ðŸ½ï¸ ${plato.cantidad}x ${plato.nombre}${acotacionesText}</div>`;
                     });
                     platosHtml += '</div>';
                 }
@@ -3042,8 +2999,8 @@
         function seleccionarMesa(numeroMesa) {
             const mesa = mesas.find(m => m.numero === numeroMesa);
             if (mesa) {
-                alert(`🪑 Mesa ${numeroMesa} - Estado: ${mesa.estado}`);
-                addDebugLog(`🪑 Mesa ${numeroMesa} seleccionada - Estado: ${mesa.estado}`);
+                alert(`ðŸª‘ Mesa ${numeroMesa} - Estado: ${mesa.estado}`);
+                addDebugLog(`ðŸª‘ Mesa ${numeroMesa} seleccionada - Estado: ${mesa.estado}`);
             }
         }
 
@@ -3059,7 +3016,7 @@
             const select = document.getElementById('productoSelect');
             if (!select) return;
             
-            select.innerHTML = '<option value="">Seleccionar Producto del Menú del Día</option>';
+            select.innerHTML = '<option value="">Seleccionar Producto del MenÃº del DÃ­a</option>';
             
             const menuDelDia = obtenerMenuDelDia();
             let productosEncontrados = false;
@@ -3088,7 +3045,7 @@
                 }
             });
             
-            // Agregar menú fijo (Bebidas y Extras)
+            // Agregar menÃº fijo (Bebidas y Extras)
             ['bebidas','extras'].forEach(catFija => {
                 const itemsFijos = menuFijo[catFija] || [];
                 if (itemsFijos.length > 0) {
@@ -3115,11 +3072,11 @@
             if (!productosEncontrados) {
                 const noProducts = document.createElement('option');
                 noProducts.disabled = true;
-                noProducts.textContent = 'No hay productos en el menú del día - Agrega items en la sección Menú';
+                noProducts.textContent = 'No hay productos en el menÃº del dÃ­a - Agrega items en la secciÃ³n MenÃº';
                 select.appendChild(noProducts);
-                addDebugLog('⚠️ No se encontraron productos en el menú del día');
+                addDebugLog('âš ï¸ No se encontraron productos en el menÃº del dÃ­a');
             } else {
-                addDebugLog(`✅ ${Object.keys(menuDelDia).length} categorías cargadas en comandas`);
+                addDebugLog(`âœ… ${Object.keys(menuDelDia).length} categorÃ­as cargadas en comandas`);
             }
         }
 
@@ -3131,25 +3088,25 @@
             const tipoPedido = document.querySelector('input[name="tipoPedido"]:checked').value;
             
             if (tipoPedido === 'mesa' && !mesaSelect.value) {
-                alert('⚠️ Por favor selecciona una mesa');
+                alert('âš ï¸ Por favor selecciona una mesa');
                 return;
             }
             
             if (!select.value) {
-                alert('⚠️ Por favor selecciona un producto del menú del día');
+                alert('âš ï¸ Por favor selecciona un producto del menÃº del dÃ­a');
                 return;
             }
             
             // Verificar permisos granulares
             if (!tienePermiso('crearPedidos')) {
-                alert('⚠️ No tienes permisos para agregar productos');
+                alert('âš ï¸ No tienes permisos para agregar productos');
                 return;
             }
             
             const cantidad = parseInt(cantidadInput.value) || 1;
             const acotaciones = acotacionesInput ? acotacionesInput.value.trim() : '';
             if (cantidad < 1) {
-                alert('⚠️ La cantidad debe ser mayor a 0');
+                alert('âš ï¸ La cantidad debe ser mayor a 0');
                 return;
             }
             
@@ -3157,7 +3114,7 @@
             const stockDisponible = parseInt(selectedOption.dataset.stock);
             
             if (cantidad > stockDisponible) {
-                alert(`⚠️ Stock insuficiente. Disponible: ${stockDisponible}`);
+                alert(`âš ï¸ Stock insuficiente. Disponible: ${stockDisponible}`);
                 return;
             }
             
@@ -3216,7 +3173,7 @@
             actualizarMesas();
             actualizarDashboard();
             cargarProductosDelMenu(); // Recargar select para ver nuevo stock
-            addDebugLog(`📋 Producto agregado: ${selectedOption.text} para ${tipoPedido === 'mesa' ? 'Mesa ' + mesa : 'Llevar'}${acotaciones ? ' (Acotaciones: ' + acotaciones + ')' : ''}`);
+            addDebugLog(`ðŸ“‹ Producto agregado: ${selectedOption.text} para ${tipoPedido === 'mesa' ? 'Mesa ' + mesa : 'Llevar'}${acotaciones ? ' (Acotaciones: ' + acotaciones + ')' : ''}`);
             guardarDatosSistema();
         }
 
@@ -3236,7 +3193,7 @@
                 const key = item.tipo === 'llevar' ? 'llevar' : `mesa_${item.mesa}`;
                 if (!grupos[key]) {
                     grupos[key] = {
-                        titulo: item.tipo === 'llevar' ? '🛍️ PARA LLEVAR' : `🪑 MESA ${item.mesa}`,
+                        titulo: item.tipo === 'llevar' ? 'ðŸ›ï¸ PARA LLEVAR' : `ðŸª‘ MESA ${item.mesa}`,
                         items: []
                     };
                 }
@@ -3258,19 +3215,19 @@
                 grupo.items.forEach(item => {
                     subtotalGrupo += item.precioTotal;
                     totalGeneral += item.precioTotal;
-                    const acotacionesText = item.acotaciones ? `<br><small style="color: var(--warning-color); font-style: italic;">📝 ${item.acotaciones}</small>` : '';
+                    const acotacionesText = item.acotaciones ? `<br><small style="color: var(--warning-color); font-style: italic;">ðŸ“ ${item.acotaciones}</small>` : '';
                     html += `
                         <div style="padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: white;">
                             <div>
                                 <strong>${item.nombre}</strong>
                                 <br><small style="color: var(--neutral-600);">
-                                    🔢 ${item.cantidad}x | 🏷️ ${item.subcategoria}
+                                    ðŸ”¢ ${item.cantidad}x | ðŸ·ï¸ ${item.subcategoria}
                                 </small>
                                 ${acotacionesText}
                             </div>
                             <div style="text-align: right;">
                                 <strong>S/.${item.precioTotal.toFixed(2)}</strong>
-                                <br><button onclick="eliminarProducto(${item.originalIndex})" class="btn btn-danger" style="font-size: 0.7rem; padding: 2px 6px; margin-top: 4px;">❌</button>
+                                <br><button onclick="eliminarProducto(${item.originalIndex})" class="btn btn-danger" style="font-size: 0.7rem; padding: 2px 6px; margin-top: 4px;">âŒ</button>
                             </div>
                         </div>
                     `;
@@ -3286,7 +3243,7 @@
             
             html += `
                 <div style="padding: 15px; background: var(--primary-color); color: white; text-align: center; font-weight: bold; font-size: 1.2rem; border-radius: 8px; margin-top: 10px;">
-                    💰 TOTAL GENERAL: S/.${totalGeneral.toFixed(2)}
+                    ðŸ’° TOTAL GENERAL: S/.${totalGeneral.toFixed(2)}
                 </div>
             `;
             html += '</div>';
@@ -3298,7 +3255,7 @@
         function eliminarProducto(index) {
             const item = carritoComandas[index];
             if (item) {
-                // Devolver stock al menú
+                // Devolver stock al menÃº
                 if (['bebidas', 'extras'].includes(item.categoria)) {
                     const itemFijo = menuFijo[item.categoria].find(i => i.id === item.itemId);
                     if (itemFijo) itemFijo.stock += item.cantidad;
@@ -3320,18 +3277,18 @@
             actualizarMesas();
             actualizarMesasComandas();
             guardarDatosSistema();
-            addDebugLog(`🗑️ Producto eliminado del índice ${index}`);
+            addDebugLog(`ðŸ—‘ï¸ Producto eliminado del Ã­ndice ${index}`);
         }
 
         function enviarCocina() {
             if (carritoComandas.length === 0) {
-                alert('⚠️ No hay productos para enviar');
+                alert('âš ï¸ No hay productos para enviar');
                 return;
             }
             
             // Verificar permisos granulares
             if (!tienePermiso('enviarACocina')) {
-                alert('⚠️ No tienes permisos para enviar pedidos a cocina');
+                alert('âš ï¸ No tienes permisos para enviar pedidos a cocina');
                 return;
             }
             
@@ -3359,12 +3316,12 @@
             actualizarMesasCocina();
             actualizarDashboard();
             
-            alert(`✅ ${productosEnviados} productos enviados a cocina`);
-            addDebugLog(`🍳 ${productosEnviados} productos enviados a cocina desde ${mesasOrigen} mesas`);
+            alert(`âœ… ${productosEnviados} productos enviados a cocina`);
+            addDebugLog(`ðŸ³ ${productosEnviados} productos enviados a cocina desde ${mesasOrigen} mesas`);
             guardarDatosSistema();
         }
 
-        // ============ ACTUALIZACIÓN DE MESAS EN COMANDAS ============
+        // ============ ACTUALIZACIÃ“N DE MESAS EN COMANDAS ============
         function actualizarMesasComandas() {
             const grid = document.getElementById('mesasGridComandas');
             if (!grid) return;
@@ -3380,8 +3337,8 @@
                 if (platos.length > 0) {
                     platosHtml = '<div style="margin-top: 8px; padding: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; max-height: 80px; overflow-y: auto;">';
                     platos.forEach(plato => {
-                        const acotacionesText = plato.acotaciones ? `<br><span style="display:inline-block; margin-top:3px; background:#fff59d; color:#111; padding:2px 6px; border-radius:6px; font-weight:700;">📝 ${plato.acotaciones}</span>` : '';
-                        platosHtml += `<div style="font-size: 0.7rem; margin-bottom: 2px;">🍽️ ${plato.cantidad}x ${plato.nombre}${acotacionesText}</div>`;
+                        const acotacionesText = plato.acotaciones ? `<br><span style="display:inline-block; margin-top:3px; background:#fff59d; color:#111; padding:2px 6px; border-radius:6px; font-weight:700;">ðŸ“ ${plato.acotaciones}</span>` : '';
+                        platosHtml += `<div style="font-size: 0.7rem; margin-bottom: 2px;">ðŸ½ï¸ ${plato.cantidad}x ${plato.nombre}${acotacionesText}</div>`;
                     });
                     platosHtml += '</div>';
                 }
@@ -3397,10 +3354,10 @@
                 grid.appendChild(mesaDiv);
             });
             
-            addDebugLog(`📋 Vista de mesas actualizada en comandas`);
+            addDebugLog(`ðŸ“‹ Vista de mesas actualizada en comandas`);
         }
 
-        // ============ ACTUALIZACIÓN DE MESAS EN COCINA ============
+        // ============ ACTUALIZACIÃ“N DE MESAS EN COCINA ============
         function actualizarMesasCocina() {
             const grid = document.getElementById('mesasGridCocina');
             if (!grid) return;
@@ -3416,8 +3373,8 @@
                 if (platos.length > 0) {
                     platosHtml = '<div style="margin-top: 8px; padding: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; max-height: 80px; overflow-y: auto;">';
                     platos.forEach(plato => {
-                        const acotacionesText = plato.acotaciones ? `<br><span style="display:inline-block; margin-top:3px; background:#fff59d; color:#111; padding:2px 6px; border-radius:6px; font-weight:700;">📝 ${plato.acotaciones}</span>` : '';
-                        platosHtml += `<div style="font-size: 0.7rem; margin-bottom: 2px;">🍽️ ${plato.cantidad}x ${plato.nombre}${acotacionesText}</div>`;
+                        const acotacionesText = plato.acotaciones ? `<br><span style="display:inline-block; margin-top:3px; background:#fff59d; color:#111; padding:2px 6px; border-radius:6px; font-weight:700;">ðŸ“ ${plato.acotaciones}</span>` : '';
+                        platosHtml += `<div style="font-size: 0.7rem; margin-bottom: 2px;">ðŸ½ï¸ ${plato.cantidad}x ${plato.nombre}${acotacionesText}</div>`;
                     });
                     platosHtml += '</div>';
                 }
@@ -3433,7 +3390,7 @@
                 grid.appendChild(mesaDiv);
             });
             
-            addDebugLog(`🍳 Vista de mesas actualizada en cocina`);
+            addDebugLog(`ðŸ³ Vista de mesas actualizada en cocina`);
         }
 
         // ============ SISTEMA DE COCINA ============
@@ -3453,20 +3410,20 @@
             let html = '';
             pedidosCocina.forEach((pedido, index) => {
                 if (pedido.estado === 'pendiente') {
-                    const acotacionesText = pedido.acotaciones ? `<br><small style="color: var(--warning-color); font-style: italic;">📝 ${pedido.acotaciones}</small>` : '';
+                    const acotacionesText = pedido.acotaciones ? `<br><small style="color: var(--warning-color); font-style: italic;">ðŸ“ ${pedido.acotaciones}</small>` : '';
                     html += `
                         <div style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid var(--warning-color); box-shadow: var(--shadow);">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div>
-                                    <strong>🪑 Mesa ${pedido.mesa}</strong> - ${pedido.nombre}
+                                    <strong>ðŸª‘ Mesa ${pedido.mesa}</strong> - ${pedido.nombre}
                                     <br><small style="color: var(--text-muted);">
-                                        Cantidad: ${pedido.cantidad} | Subcategoría: ${pedido.subcategoria} | S/.${pedido.precioTotal.toFixed(2)}
+                                        Cantidad: ${pedido.cantidad} | SubcategorÃ­a: ${pedido.subcategoria} | S/.${pedido.precioTotal.toFixed(2)}
                                     </small>
                                     ${acotacionesText}
-                                    <br><small style="color: var(--neutral-500);">🕐 ${pedido.timestamp.toLocaleTimeString()}</small>
+                                    <br><small style="color: var(--neutral-500);">ðŸ• ${pedido.timestamp.toLocaleTimeString()}</small>
                                 </div>
                                 <button onclick="marcarPedidoListo(${index})" class="btn btn-success" style="font-size: 0.9rem; padding: 8px 16px;">
-                                    ✅ Marcar Listo
+                                    âœ… Marcar Listo
                                 </button>
                             </div>
                         </div>
@@ -3480,7 +3437,7 @@
                 </div>
             `;
             
-            addDebugLog(`🍳 Vista de cocina actualizada: ${pedidosCocina.filter(p => p.estado === 'pendiente').length} pedidos pendientes`);
+            addDebugLog(`ðŸ³ Vista de cocina actualizada: ${pedidosCocina.filter(p => p.estado === 'pendiente').length} pedidos pendientes`);
         }
 
         function marcarPedidoListo(index) {
@@ -3489,7 +3446,7 @@
             
             // Verificar permisos granulares
             if (!tienePermiso('gestionarCocina')) {
-                alert('⚠️ No tienes permisos para marcar pedidos como listos');
+                alert('âš ï¸ No tienes permisos para marcar pedidos como listos');
                 return;
             }
             
@@ -3499,7 +3456,7 @@
             // Sonido de pedido listo
             sonidoPedidoListo();
             
-            // Verificar si todos los pedidos de la mesa están listos
+            // Verificar si todos los pedidos de la mesa estÃ¡n listos
             const pedidosMesa = pedidosCocina.filter(p => p.mesa === pedido.mesa);
             const todosListos = pedidosMesa.every(p => p.estado === 'listo');
             
@@ -3507,7 +3464,7 @@
                 // Enviar mesa completa a cuentas
                 enviarMesaACuentas(pedido.mesa);
                 
-                // NOTA: No cambiamos el estado a 'libre' aquí porque la mesa debe seguir ocupada
+                // NOTA: No cambiamos el estado a 'libre' aquÃ­ porque la mesa debe seguir ocupada
                 // hasta que se pague la cuenta. enviarMesaACuentas se encarga de gestionar el estado.
             }
             
@@ -3517,7 +3474,7 @@
             actualizarMesasCocina();
             actualizarDashboard();
             
-            addDebugLog(`✅ Pedido marcado como listo - Mesa ${pedido.mesa}`);
+            addDebugLog(`âœ… Pedido marcado como listo - Mesa ${pedido.mesa}`);
             guardarDatosSistema();
         }
 
@@ -3545,11 +3502,11 @@
             // Limpiar pedidos de la mesa
             pedidosCocina = pedidosCocina.filter(p => p.mesa !== numeroMesa);
             
-            // Actualizar estado de mesa a 'activa' (mantiene ocupación hasta cobrar)
+            // Actualizar estado de mesa a 'activa' (mantiene ocupaciÃ³n hasta cobrar)
             const mesaObj = mesas.find(m => m.numero === numeroMesa);
             if (mesaObj) {
                 mesaObj.estado = 'activa';
-                addDebugLog(`🪑 Mesa ${numeroMesa} actualizada a estado: activa (cuenta pendiente)`);
+                addDebugLog(`ðŸª‘ Mesa ${numeroMesa} actualizada a estado: activa (cuenta pendiente)`);
             }
             
             // Sonido de mesa enviada a cuentas
@@ -3562,7 +3519,7 @@
             actualizarMesasCocina();
             actualizarDashboard();
             
-            addDebugLog(`💰 Mesa ${numeroMesa} enviada a cuentas - Total: S/.${totalMesa.toFixed(2)}. Mesa permanece ocupada.`);
+            addDebugLog(`ðŸ’° Mesa ${numeroMesa} enviada a cuentas - Total: S/.${totalMesa.toFixed(2)}. Mesa permanece ocupada.`);
             guardarDatosSistema();
         }
 
@@ -3588,7 +3545,7 @@
                 html += `
                     <div style="background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: var(--shadow);">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <h4 style="margin: 0; color: var(--primary-color);">🪑 Mesa ${cuenta.mesa}</h4>
+                            <h4 style="margin: 0; color: var(--primary-color);">ðŸª‘ Mesa ${cuenta.mesa}</h4>
                             <span class="badge badge-warning">${cuenta.estado}</span>
                         </div>
                         
@@ -3602,7 +3559,7 @@
                         </div>
                         
                         <div style="margin: 8px 0 12px 0;">
-                            <label style="display:block; font-weight:600; margin-bottom:6px;">📝 Acotaciones de la cuenta</label>
+                            <label style="display:block; font-weight:600; margin-bottom:6px;">ðŸ“ Acotaciones de la cuenta</label>
                             <textarea onchange="setAcotacionCuenta(${index}, this.value)" style="width:100%; min-height:60px; padding:8px; border:1px solid var(--neutral-200); border-radius:6px;">${cuenta.acotacionesCuenta || ''}</textarea>
                         </div>
                         
@@ -3613,12 +3570,12 @@
                         
                         <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <span style="font-weight: 600; margin-right: 8px;">Método:</span>
-                                <button onclick="seleccionarMetodoPago(${index}, 'efectivo')" class="btn ${cuenta.metodoSeleccionado==='efectivo' ? '' : 'btn-secondary'}" style="padding: 6px 10px; font-size: 0.85rem; margin-right: 6px;">💵 Efectivo</button>
-                                <button onclick="seleccionarMetodoPago(${index}, 'transferencia')" class="btn ${cuenta.metodoSeleccionado==='transferencia' ? '' : 'btn-secondary'}" style="padding: 6px 10px; font-size: 0.85rem;">🏦 Transferencia</button>
+                                <span style="font-weight: 600; margin-right: 8px;">MÃ©todo:</span>
+                                <button onclick="seleccionarMetodoPago(${index}, 'efectivo')" class="btn ${cuenta.metodoSeleccionado==='efectivo' ? '' : 'btn-secondary'}" style="padding: 6px 10px; font-size: 0.85rem; margin-right: 6px;">ðŸ’µ Efectivo</button>
+                                <button onclick="seleccionarMetodoPago(${index}, 'transferencia')" class="btn ${cuenta.metodoSeleccionado==='transferencia' ? '' : 'btn-secondary'}" style="padding: 6px 10px; font-size: 0.85rem;">ðŸ¦ Transferencia</button>
                             </div>
                             <div>
-                                <button onclick="cobrarCuenta(${index})" class="btn btn-success">💰 Cobrar</button>
+                                <button onclick="cobrarCuenta(${index})" class="btn btn-success">ðŸ’° Cobrar</button>
                             </div>
                         </div>
                     </div>
@@ -3626,9 +3583,9 @@
             });
             
             cuentasDiv.innerHTML = html;
-            // No modificar ventasHoy aquí; ventasHoy se actualiza solo al cobrar
+            // No modificar ventasHoy aquÃ­; ventasHoy se actualiza solo al cobrar
             
-            addDebugLog(`💰 Vista de cuentas actualizada: ${cuentasPendientes.length} cuentas pendientes`);
+            addDebugLog(`ðŸ’° Vista de cuentas actualizada: ${cuentasPendientes.length} cuentas pendientes`);
         }
         
         function setAcotacionCuenta(index, valor) {
@@ -3651,7 +3608,7 @@
             
             // Verificar permisos granulares
             if (!tienePermiso('gestionarCuentas')) {
-                alert('⚠️ No tienes permisos para cobrar cuentas');
+                alert('âš ï¸ No tienes permisos para cobrar cuentas');
                 return;
             }
             
@@ -3700,7 +3657,7 @@
             const mesaObj = mesas.find(m => m.numero === cuenta.mesa);
             if (mesaObj) {
                 mesaObj.estado = 'libre';
-                addDebugLog(`🪑 Mesa ${cuenta.mesa} actualizada a estado: libre`);
+                addDebugLog(`ðŸª‘ Mesa ${cuenta.mesa} actualizada a estado: libre`);
             }
             
             cuentasPendientes.splice(index, 1);
@@ -3715,7 +3672,7 @@
             
             sonidoCobroExitoso();
             
-            addDebugLog(`💰 Cuenta Mesa ${cuenta.mesa} cobrada: S/.${cuenta.total.toFixed(2)} por ${metodo}. Mesa liberada.`);
+            addDebugLog(`ðŸ’° Cuenta Mesa ${cuenta.mesa} cobrada: S/.${cuenta.total.toFixed(2)} por ${metodo}. Mesa liberada.`);
         }
 
         function guardarAcotacionHistorial(entry) {
@@ -3725,11 +3682,11 @@
                 const list = prev ? JSON.parse(prev) : [];
                 list.push(entry);
                 localStorage.setItem(key, JSON.stringify(list));
-                addDebugLog('💾 Acotación guardada en historial');
+                addDebugLog('ðŸ’¾ AcotaciÃ³n guardada en historial');
             } catch (_) {}
         }
 
-        // ============ SISTEMA DE MENÚ ============
+        // ============ SISTEMA DE MENÃš ============
         let categoriaSeleccionada = 'desayuno';
         function seleccionarCategoriaMenu(cat) {
             categoriaSeleccionada = cat;
@@ -3738,9 +3695,9 @@
             const btn = document.querySelector(`#panelMenuAdmin .tab-cat[data-cat="${cat}"]`);
             if (btn) btn.classList.add('active');
             const titulo = document.getElementById('tituloCategoriaAdmin');
-            if (titulo) titulo.textContent = `Agregar al Menú - ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
+            if (titulo) titulo.textContent = `Agregar al MenÃº - ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
             const tituloModal = document.getElementById('tituloCategoriaModal');
-            if (tituloModal) tituloModal.textContent = `Agregar al Menú - ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
+            if (tituloModal) tituloModal.textContent = `Agregar al MenÃº - ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
         }
         
         function abrirModalMenu() {
@@ -3763,7 +3720,7 @@
             diaSeleccionado = dia;
             categoriaSeleccionada = 'desayuno';
             
-            // Mantener sincronizados los dos selectores de día (menú y configuración)
+            // Mantener sincronizados los dos selectores de dÃ­a (menÃº y configuraciÃ³n)
             document.querySelectorAll('button.tab[onclick*="seleccionarDia"]').forEach(tab => {
                 tab.classList.remove('active');
             });
@@ -3773,7 +3730,7 @@
             
             actualizarVistaDia(dia);
             seleccionarCategoriaMenu(categoriaSeleccionada);
-            addDebugLog(`📅 Día seleccionado: ${dia}`);
+            addDebugLog(`ðŸ“… DÃ­a seleccionado: ${dia}`);
         }
 
         function actualizarVistaDia(dia) {
@@ -3783,8 +3740,8 @@
             const itemsAdminDiv = document.getElementById('itemsAdminDia');
             const diaFormateado = dia.charAt(0).toUpperCase() + dia.slice(1);
             
-            if (tituloMenu) tituloMenu.textContent = `Menú del día - ${diaFormateado}`;
-            if (tituloAdmin) tituloAdmin.textContent = `Configuración del Menú - ${diaFormateado}`;
+            if (tituloMenu) tituloMenu.textContent = `MenÃº del dÃ­a - ${diaFormateado}`;
+            if (tituloAdmin) tituloAdmin.textContent = `ConfiguraciÃ³n del MenÃº - ${diaFormateado}`;
             
             if (!itemsDiv && !itemsAdminDiv) return;
             
@@ -3795,7 +3752,7 @@
             ['desayuno', 'almuerzo', 'cena'].forEach(categoria => {
                 const itemsCategoria = items[categoria];
                 
-                // Diseño optimizado para móviles (Cards compactas)
+                // DiseÃ±o optimizado para mÃ³viles (Cards compactas)
                 html += `
                     <div class="panel-section" style="padding: 1rem; margin-bottom: 1rem;">
                         <h4 style="text-transform: capitalize; margin-bottom: 10px; border-bottom: 2px solid var(--primary-color); display: inline-block;">${categoria}</h4>
@@ -3813,7 +3770,7 @@
                     htmlAdmin += '<p style="color: var(--neutral-600); font-style: italic;">No hay items</p>';
                 } else {
                     itemsCategoria.forEach((item, index) => {
-                        // Card compacta para móvil
+                        // Card compacta para mÃ³vil
                         html += `
                             <div style="background: var(--bg-tertiary); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; min-height: 80px;">
                                 <div style="font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; line-height: 1.2;">${item.nombre}</div>
@@ -3829,10 +3786,10 @@
                                 <div>
                                     <strong>${item.nombre}</strong>
                                     <br><small style="color: var(--neutral-600);">
-                                        💰 S/.${item.precio.toFixed(2)} | 🏷️ ${item.subcategoria} | 📦 Stock: ${item.stock}
+                                        ðŸ’° S/.${item.precio.toFixed(2)} | ðŸ·ï¸ ${item.subcategoria} | ðŸ“¦ Stock: ${item.stock}
                                     </small>
                                 </div>
-                                <button onclick="eliminarItemMenu('${dia}', '${categoria}', ${index})" class="btn btn-danger" style="font-size: 0.8rem; padding: 4px 8px;">❌</button>
+                                <button onclick="eliminarItemMenu('${dia}', '${categoria}', ${index})" class="btn btn-danger" style="font-size: 0.8rem; padding: 4px 8px;">âŒ</button>
                             </div>
                         `;
                     });
@@ -3859,13 +3816,13 @@
             const stock = stockInput ? (parseInt(stockInput.value) || 0) : 0;
             
             if (!nombre || isNaN(precio) || precio <= 0) {
-                alert('⚠️ Por favor completa todos los campos correctamente');
+                alert('âš ï¸ Por favor completa todos los campos correctamente');
                 return;
             }
             
             // Verificar permisos granulares
             if (!tienePermiso('gestionarPermisos')) {
-                alert('⚠️ No tienes permisos para agregar items al menú');
+                alert('âš ï¸ No tienes permisos para agregar items al menÃº');
                 return;
             }
             
@@ -3888,9 +3845,9 @@
             guardarMenuSemanal();
             cargarProductosDelMenu();
             
-            alert(`✅ Item agregado al menú de ${diaSeleccionado} - ${cat}`);
+            alert(`âœ… Item agregado al menÃº de ${diaSeleccionado} - ${cat}`);
             cerrarModalMenu();
-            addDebugLog(`🍽️ Item agregado: ${nombre} (${subcategoria}) - S/.${precio}`);
+            addDebugLog(`ðŸ½ï¸ Item agregado: ${nombre} (${subcategoria}) - S/.${precio}`);
         }
         
         function agregarItemFijo(categoria) {
@@ -3904,7 +3861,7 @@
             const stock = stockInput ? parseInt(stockInput.value) || 0 : 0;
             const subcat = subcatInput ? subcatInput.value.trim() || 'general' : 'general';
             if (!nombre || isNaN(precio) || precio <= 0) {
-                alert('⚠️ Completa nombre y precio correctamente');
+                alert('âš ï¸ Completa nombre y precio correctamente');
                 return;
             }
             const item = { id: Date.now() + Math.random(), nombre, precio, stock, subcategoria: subcat };
@@ -3917,7 +3874,7 @@
             if (precioInput) precioInput.value = '';
             if (stockInput) stockInput.value = '';
             if (subcatInput) subcatInput.value = '';
-            addDebugLog(`🧃 Item fijo agregado en ${categoria}: ${nombre} - $${precio}`);
+            addDebugLog(`ðŸ§ƒ Item fijo agregado en ${categoria}: ${nombre} - $${precio}`);
         }
         
         function renderMenuFijoListados() {
@@ -3933,7 +3890,7 @@
                     html += `
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--neutral-100);">
                             <span style="font-size: 0.85rem;">${item.nombre} (S/.${item.precio.toFixed(2)})</span>
-                            <button onclick="eliminarItemFijo('bebidas', ${index})" class="btn btn-danger" style="padding: 2px 5px; font-size: 0.7rem;">❌</button>
+                            <button onclick="eliminarItemFijo('bebidas', ${index})" class="btn btn-danger" style="padding: 2px 5px; font-size: 0.7rem;">âŒ</button>
                         </div>
                     `;
                 });
@@ -3963,7 +3920,7 @@
                     html += `
                         <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--neutral-100);">
                             <span style="font-size: 0.85rem;">${item.nombre} (S/.${item.precio.toFixed(2)})</span>
-                            <button onclick="eliminarItemFijo('extras', ${index})" class="btn btn-danger" style="padding: 2px 5px; font-size: 0.7rem;">❌</button>
+                            <button onclick="eliminarItemFijo('extras', ${index})" class="btn btn-danger" style="padding: 2px 5px; font-size: 0.7rem;">âŒ</button>
                         </div>
                     `;
                 });
@@ -3989,13 +3946,13 @@
 
         function eliminarItemMenu(dia, categoria, index) {
             const item = menuSemanal[dia][categoria][index];
-            if (confirm(`¿Estás seguro de eliminar "${item.nombre}" del menú?`)) {
+            if (confirm(`Â¿EstÃ¡s seguro de eliminar "${item.nombre}" del menÃº?`)) {
                 menuSemanal[dia][categoria].splice(index, 1);
                 actualizarVistaDia(dia);
                 guardarMenuSemanal();
                 cargarProductosDelMenu();
                 
-                addDebugLog(`🗑️ Item eliminado: ${item.nombre}`);
+                addDebugLog(`ðŸ—‘ï¸ Item eliminado: ${item.nombre}`);
             }
         }
 
@@ -4044,7 +4001,7 @@
             try {
                 localStorage.setItem('fenix_datos_sistema', JSON.stringify(datos));
             } catch (error) {
-                console.error('❌ Error guardando datos del sistema:', error);
+                console.error('âŒ Error guardando datos del sistema:', error);
             }
             
             try {
@@ -4061,13 +4018,13 @@
                         seqWrite: datos.seqWrite,
                         writtenAt: datos.writtenAt
                     }).then(() => {
-                        addDebugLog(`🔥 Estado sincronizado por ${CLIENT_ID} seq=${seqWrite}`);
+                        addDebugLog(`ðŸ”¥ Estado sincronizado por ${CLIENT_ID} seq=${seqWrite}`);
                     }).catch((error) => {
-                        console.error('❌ Error sincronizando estado del sistema:', error);
+                        console.error('âŒ Error sincronizando estado del sistema:', error);
                     });
                 }
             } catch (error) {
-                console.error('❌ Error en sincronización remota:', error);
+                console.error('âŒ Error en sincronizaciÃ³n remota:', error);
             }
         }
 
@@ -4109,47 +4066,47 @@
                     if (Array.isArray(datos.acotacionesDelDia)) acotacionesDelDia = datos.acotacionesDelDia;
                     if (datos.menuFijo) menuFijo = datos.menuFijo;
                     
-                    addDebugLog('📂 Datos del sistema restaurados desde localStorage');
+                    addDebugLog('ðŸ“‚ Datos del sistema restaurados desde localStorage');
                 }
             } catch (error) {
-                console.error('❌ Error cargando datos del sistema:', error);
-                addDebugLog('❌ Error cargando datos del sistema');
+                console.error('âŒ Error cargando datos del sistema:', error);
+                addDebugLog('âŒ Error cargando datos del sistema');
             }
         }
 
         function guardarMenuSemanal() {
             localStorage.setItem('fenix_menu_semanal', JSON.stringify(menuSemanal));
-            addDebugLog('💾 Menú semanal guardado');
+            addDebugLog('ðŸ’¾ MenÃº semanal guardado');
             
-            // Sincronizar con Firebase si está disponible
+            // Sincronizar con Firebase si estÃ¡ disponible
             if (window.db) {
                 window.db.collection('menu').doc('semanal').set({
                     semanal: menuSemanal,
                     ultimaActualizacion: new Date()
                 }).then(() => {
-                    addDebugLog('🔥 Menú sincronizado con Firebase');
+                    addDebugLog('ðŸ”¥ MenÃº sincronizado con Firebase');
                 }).catch((error) => {
-                    console.error('❌ Error sincronizando menú con Firebase:', error);
+                    console.error('âŒ Error sincronizando menÃº con Firebase:', error);
                 });
             }
         }
         
         function guardarMenuFijo() {
             localStorage.setItem('fenix_menu_fijo', JSON.stringify(menuFijo));
-            addDebugLog('💾 Menú fijo guardado');
+            addDebugLog('ðŸ’¾ MenÃº fijo guardado');
             try {
                 if (window.db) {
                     window.db.collection('menu').doc('fijo').set({
                         fijo: menuFijo,
                         ultimaActualizacion: new Date()
                     }, { merge: true }).then(() => {
-                        addDebugLog('🔥 Menú fijo sincronizado con Firebase');
+                        addDebugLog('ðŸ”¥ MenÃº fijo sincronizado con Firebase');
                     }).catch((error) => {
-                        console.error('❌ Error sincronizando menú fijo con Firebase:', error);
+                        console.error('âŒ Error sincronizando menÃº fijo con Firebase:', error);
                     });
                 }
             } catch (error) {
-                console.error('❌ Error en sync menú fijo:', error);
+                console.error('âŒ Error en sync menÃº fijo:', error);
             }
         }
         
@@ -4158,21 +4115,21 @@
                 const guardado = localStorage.getItem('fenix_menu_semanal');
                 if (guardado) {
                     menuSemanal = JSON.parse(guardado);
-                    addDebugLog('📂 Menú semanal cargado');
+                    addDebugLog('ðŸ“‚ MenÃº semanal cargado');
                 }
             } catch (error) {
-                console.error('❌ Error cargando menú semanal:', error);
-                addDebugLog('❌ Error cargando menú semanal');
+                console.error('âŒ Error cargando menÃº semanal:', error);
+                addDebugLog('âŒ Error cargando menÃº semanal');
             }
             try {
                 const fijo = localStorage.getItem('fenix_menu_fijo');
                 if (fijo) {
                     menuFijo = JSON.parse(fijo);
-                    addDebugLog('📂 Menú fijo cargado');
+                    addDebugLog('ðŸ“‚ MenÃº fijo cargado');
                 }
             } catch (error) {
-                console.error('❌ Error cargando menú fijo:', error);
-                addDebugLog('❌ Error cargando menú fijo');
+                console.error('âŒ Error cargando menÃº fijo:', error);
+                addDebugLog('âŒ Error cargando menÃº fijo');
             }
         }
 
@@ -4184,7 +4141,7 @@
             document.getElementById('totalMesasActivas').textContent = mesasActivas;
             document.getElementById('totalPedidosCocina').textContent = pedidosEnCocina;
             document.getElementById('totalVentas').textContent = `$${ventasHoy.toFixed(2)}`;
-            addDebugLog(`📊 Dashboard actualizado - Mesas activas: ${mesasActivas}, Pedidos en cocina: ${pedidosEnCocina}`);
+            addDebugLog(`ðŸ“Š Dashboard actualizado - Mesas activas: ${mesasActivas}, Pedidos en cocina: ${pedidosEnCocina}`);
             renderResumenMenuDia();
         }
         
@@ -4221,7 +4178,7 @@
             let tema;
             
             if (temaParam) {
-                // Si se proporciona un parámetro (desde botones)
+                // Si se proporciona un parÃ¡metro (desde botones)
                 tema = temaParam;
             } else {
                 // Si no, obtener del select (legacy)
@@ -4231,10 +4188,10 @@
             // Remover todas las clases de tema
             document.body.className = document.body.className.replace(/theme-\w+|blue-theme|purple-theme|orange-theme|pink-theme|dark-theme/g, '');
             
-            // Aplicar nuevo tema según el parámetro
+            // Aplicar nuevo tema segÃºn el parÃ¡metro
             switch (tema) {
                 case 'verde':
-                    // Tema verde por defecto (ya está en :root)
+                    // Tema verde por defecto (ya estÃ¡ en :root)
                     break;
                 case 'azul':
                     document.body.classList.add('blue-theme');
@@ -4264,7 +4221,7 @@
             
             // Guardar preferencia
             localStorage.setItem('fenix_tema', tema);
-            addDebugLog(`🎨 Tema cambiado a: ${tema}`);
+            addDebugLog(`ðŸŽ¨ Tema cambiado a: ${tema}`);
         }
 
         function cargarTema() {
@@ -4272,14 +4229,14 @@
             cambiarTema(temaGuardado);
         }
 
-        // ============ GESTIÓN DE HISTORIAL Y DATOS ============
+        // ============ GESTIÃ“N DE HISTORIAL Y DATOS ============
         function eliminarHistorialDia() {
             if (!tienePermiso('gestionarPermisos')) {
-                alert('⚠️ No tienes permisos para eliminar historial');
+                alert('âš ï¸ No tienes permisos para eliminar historial');
                 return;
             }
 
-            if (confirm('¿Estás seguro de eliminar el historial del día actual? Esta acción no se puede deshacer.')) {
+            if (confirm('Â¿EstÃ¡s seguro de eliminar el historial del dÃ­a actual? Esta acciÃ³n no se puede deshacer.')) {
                 ventasHoy = 0;
                 transaccionesHoy = 0;
                 limpiarDatosInformes();
@@ -4288,23 +4245,23 @@
                 actualizarDashboard();
                 actualizarVistaInformes();
                 
-                addDebugLog('📅 Historial del día eliminado');
-                alert('✅ Historial del día eliminado exitosamente');
+                addDebugLog('ðŸ“… Historial del dÃ­a eliminado');
+                alert('âœ… Historial del dÃ­a eliminado exitosamente');
             }
         }
 
         function eliminarHistorialSemanal() {
             if (!tienePermiso('gestionarPermisos')) {
-                alert('⚠️ No tienes permisos para eliminar historial');
+                alert('âš ï¸ No tienes permisos para eliminar historial');
                 return;
             }
 
-            if (confirm('¿Estás seguro de eliminar TODO el historial semanal? Esta acción no se puede deshacer.')) {
+            if (confirm('Â¿EstÃ¡s seguro de eliminar TODO el historial semanal? Esta acciÃ³n no se puede deshacer.')) {
                 ventasHoy = 0;
                 transaccionesHoy = 0;
                 limpiarDatosInformes();
                 
-                // Limpiar datos de rendimiento por hora y estadísticas detalladas
+                // Limpiar datos de rendimiento por hora y estadÃ­sticas detalladas
                 localStorage.removeItem('fenix_estadisticas_semanal');
                 localStorage.removeItem('fenix_rendimiento_hora');
                 
@@ -4314,13 +4271,13 @@
                 actualizarDashboard();
                 actualizarVistaInformes();
                 
-                addDebugLog('📆 Historial semanal eliminado');
-                alert('✅ Historial semanal eliminado exitosamente');
+                addDebugLog('ðŸ“† Historial semanal eliminado');
+                alert('âœ… Historial semanal eliminado exitosamente');
             }
         }
 
         function limpiarDatosInformes() {
-            // Limpiar datos específicos de informes y gráficos
+            // Limpiar datos especÃ­ficos de informes y grÃ¡ficos
             const elementos = [
                 'mesasChartData',
                 'categoriasChartData', 
@@ -4339,7 +4296,7 @@
                 const elemento = document.getElementById(id);
                 if (elemento) {
                     if (id === 'resumenMenuDia') {
-                        elemento.innerHTML = '<div style="color: var(--text-muted); font-style: italic; text-align: center; padding: 1rem;">No hay menú configurado para hoy</div>';
+                        elemento.innerHTML = '<div style="color: var(--text-muted); font-style: italic; text-align: center; padding: 1rem;">No hay menÃº configurado para hoy</div>';
                     } else if (id === 'pedidosCocina') {
                         elemento.innerHTML = '<div style="color: var(--text-muted); font-style: italic; text-align: center; padding: 2rem;">No hay pedidos en cocina</div>';
                     } else if (id === 'cuentasPendientes') {
@@ -4373,26 +4330,26 @@
             localStorage.removeItem('fenix_historial_cobros');
             localStorage.removeItem('fenix_acotaciones_dia');
             
-            addDebugLog('🗑️ Datos de informes limpiados completamente');
+            addDebugLog('ðŸ—‘ï¸ Datos de informes limpiados completamente');
         }
 
         function restablecerTodosLosDatos() {
             if (!tienePermiso('gestionarPermisos')) {
-                alert('⚠️ No tienes permisos para restablecer el sistema');
+                alert('âš ï¸ No tienes permisos para restablecer el sistema');
                 return;
             }
 
-            const confirmacion = prompt('⚠️ ADVERTENCIA: Esta acción eliminará TODOS los datos del sistema.\\n\\nPara confirmar, escribe "RESTABLECER":');
+            const confirmacion = prompt('âš ï¸ ADVERTENCIA: Esta acciÃ³n eliminarÃ¡ TODOS los datos del sistema.\\n\\nPara confirmar, escribe "RESTABLECER":');
             
             if (confirmacion !== 'RESTABLECER') {
                 if (confirmacion) {
-                    alert('❌ Confirmación incorrecta. Operación cancelada.');
+                    alert('âŒ ConfirmaciÃ³n incorrecta. OperaciÃ³n cancelada.');
                 }
-                addDebugLog('⚠️ Restablecimiento cancelado - Confirmación incorrecta');
+                addDebugLog('âš ï¸ Restablecimiento cancelado - ConfirmaciÃ³n incorrecta');
                 return;
             }
 
-            if (confirm('¿Confirmas que quieres RESTABLECER COMPLETAMENTE el sistema?\\n\\nEsta acción eliminará:\\n• Todos los pedidos\\n• Todas las cuentas\\n• Todo el historial de ventas\\n• Todas las configuraciones de menú\\n• Todas las estadísticas\\n\\nNO se puede deshacer.')) {
+            if (confirm('Â¿Confirmas que quieres RESTABLECER COMPLETAMENTE el sistema?\\n\\nEsta acciÃ³n eliminarÃ¡:\\nâ€¢ Todos los pedidos\\nâ€¢ Todas las cuentas\\nâ€¢ Todo el historial de ventas\\nâ€¢ Todas las configuraciones de menÃº\\nâ€¢ Todas las estadÃ­sticas\\n\\nNO se puede deshacer.')) {
                 
                 // Limpiar todas las variables del sistema
                 carritoComandas = [];
@@ -4402,7 +4359,7 @@
                 transaccionesHoy = 0;
                 sistemaReseteado = true;
                 
-                // Marcar reset para sincronización remota
+                // Marcar reset para sincronizaciÃ³n remota
                 const resetTime = new Date();
                 const resetBy = currentUser ? currentUser.username : 'admin';
                 
@@ -4435,12 +4392,12 @@
                 actualizarVistaInformes();
                 actualizarVistaDia(diaSeleccionado);
                 
-                // Recargar configuración de sonidos
+                // Recargar configuraciÃ³n de sonidos
                 cargarConfiguracionSonidos();
                 actualizarCheckboxesSonidos();
                 
                 if (window.db) {
-                    // Guardar estado vacío con flag de reset en Firebase para que otros clientes lo detecten
+                    // Guardar estado vacÃ­o con flag de reset en Firebase para que otros clientes lo detecten
                     const datosVacio = {
                         mesas: mesas,
                         carritoComandas: [],
@@ -4475,8 +4432,8 @@
                     });
                 }
                 
-                addDebugLog('🔄 Sistema restablecido completamente a fábrica');
-                alert('✅ Sistema restablecido a configuración de fábrica exitosamente\n\nNota: Las configuraciones de tema y sonidos se mantuvieron.');
+                addDebugLog('ðŸ”„ Sistema restablecido completamente a fÃ¡brica');
+                alert('âœ… Sistema restablecido a configuraciÃ³n de fÃ¡brica exitosamente\n\nNota: Las configuraciones de tema y sonidos se mantuvieron.');
                 
                 sistemaReseteado = false;
             }
@@ -4509,13 +4466,13 @@
             
             try {
                 if (window.db && window.firebase) {
-                    // Probar conexión con Firebase
+                    // Probar conexiÃ³n con Firebase
                     window.db.collection('test').get().then(() => {
                         estadoElement.textContent = 'Conectado';
                         estadoElement.style.color = 'var(--success-color)';
-                        statusElement.querySelector('div div:last-child').textContent = '✅';
+                        statusElement.querySelector('div div:last-child').textContent = 'âœ…';
                         if (miniDot) miniDot.style.background = 'var(--success-color)';
-                        addDebugLog('🔥 Firebase: Estado conectado');
+                        addDebugLog('ðŸ”¥ Firebase: Estado conectado');
                     }).catch(() => {
                         throw new Error('Firebase no disponible');
                     });
@@ -4525,13 +4482,13 @@
             } catch (error) {
                 estadoElement.textContent = 'Desconectado';
                 estadoElement.style.color = 'var(--danger-color)';
-                statusElement.querySelector('div div:last-child').textContent = '❌';
+                statusElement.querySelector('div div:last-child').textContent = 'âŒ';
                 if (miniDot) miniDot.style.background = 'var(--danger-color)';
-                addDebugLog(`🔥 Firebase: Error - ${error.message}`);
+                addDebugLog(`ðŸ”¥ Firebase: Error - ${error.message}`);
             }
         }
 
-        // ============ INICIALIZACIÓN ============
+        // ============ INICIALIZACIÃ“N ============
         document.addEventListener('DOMContentLoaded', function() {
             cargarTema();
             cargarDatosSistema();
@@ -4562,3 +4519,5 @@
     </script>
 </body>
 </html>
+
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaranTe v6.19 - Sistema de Gestión de Restaurante</title>
+    <title>TaranTe v6.21 - Sistema de Gestión de Restaurante</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -11,7 +11,7 @@
     
     <!-- Firebase Configuration -->
     <script>
-        const APP_VERSION = '6.19';
+        const APP_VERSION = '6.21';
         const firebaseConfig = {
             apiKey: "AIzaSyAEB1xiIH_wUolK8NAJcklIfRV33QoBDuM",
             authDomain: "fenix-restaurant.firebaseapp.com",
@@ -821,7 +821,7 @@
             <div class="grid grid-3">
                 <div class="panel">
                     <div class="panel-header">🪑 Mesas Activas</div>
-                            <div class="panel-body" id="panelTemas">
+                    <div class="panel-body">
                         <h2 style="color: var(--success-color);" id="totalMesasActivas">0</h2>
                         <p>Mesas con pedidos activos</p>
                     </div>
@@ -977,6 +977,9 @@
 
             <!-- Vista de Items del Día -->
             <div id="vistaItemsDia">
+                <div class="panel-section" style="padding: 0.9rem 1rem;">
+                    <h3 id="tituloMenuDia" style="margin: 0;">Menú del día - Lunes</h3>
+                </div>
                 <div id="itemsMenuDia" class="grid grid-1">
                     <!-- Los items se mostrarán aquí con un diseño optimizado para móvil -->
                 </div>
@@ -1135,7 +1138,7 @@
             </div>
             
             <!-- Selector de Temas -->
-            <div class="panel-section">
+            <div class="panel-section" id="panelTemasConfig">
                 <h3>🎨 Temas del Sistema</h3>
                 <p>Selecciona el tema que más te guste:</p>
                 
@@ -2448,45 +2451,7 @@
             setInterval(actualizar, 1000);
         }
 
-        // Configurar acceso a funcionalidades según permisos
-        function configurarAccesoPorPermisos() {
-            if (!currentUser) return;
-
-            // Ocultar/mostrar elementos del nav según permisos
-            const vistas = ['dashboard', 'comandas', 'cocina', 'cuentas', 'menu', 'informes', 'configuracion'];
-            vistas.forEach(v => {
-                const item = document.querySelector(`li[data-view="${v}"]`);
-                const permiso = v === 'configuracion' ? 'gestionarConfiguracion' : `ver${v.charAt(0).toUpperCase() + v.slice(1)}`;
-                if (item) {
-                    item.style.display = tienePermiso(permiso) ? 'flex' : 'none';
-                }
-            });
-            
-            const panelMenuAdmin = document.getElementById('panelMenuAdmin');
-            if (panelMenuAdmin) {
-                panelMenuAdmin.style.display = (currentUser.role === 'admin') ? 'block' : 'none';
-            }
-            
-            // Limitar Configuración para mesero y cocinera
-            const panelHistorial = document.getElementById('panelHistorialDatos');
-            const permisosSection = document.getElementById('panelPermisosSection');
-            if (currentUser.role !== 'admin') {
-                if (panelHistorial) panelHistorial.style.display = 'none';
-                if (permisosSection) permisosSection.style.display = 'none';
-            } else {
-                if (panelHistorial) panelHistorial.style.display = 'block';
-                if (permisosSection) permisosSection.style.display = 'block';
-            }
-
-            // Elementos en la pestaña Menú para consulta del mesero
-            const vistaItemsDia = document.getElementById('vistaItemsDia');
-            const gridMenuFijo = document.getElementById('gridMenuFijo');
-            if (currentUser.role === 'mesero') {
-                if (vistaItemsDia) vistaItemsDia.style.display = 'block';
-                if (gridMenuFijo) gridMenuFijo.style.display = 'grid';
-            }
-            
-            // Si la vista activa no está permitida, cambiar a la primera permitida
+        function obtenerPermisoVista(viewName) {
             const permisoPorVista = {
                 dashboard: 'verDashboard',
                 comandas: 'verComandas',
@@ -2495,12 +2460,70 @@
                 menu: 'verMenu',
                 informes: 'verInformes'
             };
+            return permisoPorVista[viewName] || null;
+        }
+
+        function puedeVerVista(viewName) {
+            if (!currentUser) return false;
+            if (viewName === 'configuracion') return true;
+
+            const permiso = obtenerPermisoVista(viewName);
+            return permiso ? tienePermiso(permiso) : false;
+        }
+
+        function obtenerPrimeraVistaPermitida() {
+            const vistasOrden = ['dashboard', 'comandas', 'cocina', 'cuentas', 'menu', 'informes', 'configuracion'];
+            return vistasOrden.find(vista => puedeVerVista(vista)) || 'configuracion';
+        }
+
+        // Configurar acceso a funcionalidades según permisos
+        function configurarAccesoPorPermisos() {
+            if (!currentUser) return;
+
+            // Ocultar/mostrar elementos del nav según permisos
+            const vistas = ['dashboard', 'comandas', 'cocina', 'cuentas', 'menu', 'informes', 'configuracion'];
+            vistas.forEach(v => {
+                const item = document.querySelector(`li[data-view="${v}"]`);
+                if (item) {
+                    item.style.display = puedeVerVista(v) ? 'flex' : 'none';
+                }
+            });
+            
+            const panelMenuAdmin = document.getElementById('panelMenuAdmin');
+            const panelTemasConfig = document.getElementById('panelTemasConfig');
+            const panelHistorial = document.getElementById('panelHistorialDatos');
+            const permisosSection = document.getElementById('panelPermisosSection');
+            const vistaItemsDia = document.getElementById('vistaItemsDia');
+            const gridMenuFijo = document.getElementById('gridMenuFijo');
+
+            if (panelMenuAdmin) {
+                panelMenuAdmin.style.display = (currentUser.role === 'admin') ? 'block' : 'none';
+            }
+
+            if (panelTemasConfig) {
+                panelTemasConfig.style.display = tienePermiso('cambiarTemas') ? 'block' : 'none';
+            }
+
+            if (panelHistorial) {
+                panelHistorial.style.display = tienePermiso('eliminarDatos') ? 'block' : 'none';
+            }
+
+            if (permisosSection) {
+                permisosSection.style.display = tienePermiso('gestionarPermisos') ? 'block' : 'none';
+            }
+
+            if (vistaItemsDia) {
+                vistaItemsDia.style.display = puedeVerVista('menu') ? 'block' : 'none';
+            }
+
+            if (gridMenuFijo) {
+                gridMenuFijo.style.display = puedeVerVista('menu') ? 'grid' : 'none';
+            }
             
             const navActiva = document.querySelector('.nav-item.active');
             const vistaActual = navActiva ? navActiva.getAttribute('data-view') : null;
-            if (vistaActual && !tienePermiso(permisoPorVista[vistaActual])) {
-                const vistasOrden = ['dashboard','comandas','cocina','cuentas','menu','informes'];
-                const siguientePermitida = vistasOrden.find(v => tienePermiso(permisoPorVista[v]));
+            if (vistaActual && !puedeVerVista(vistaActual)) {
+                const siguientePermitida = obtenerPrimeraVistaPermitida();
                 if (siguientePermitida) {
                     showView(siguientePermitida);
                 }
@@ -2813,19 +2836,31 @@
         });
 
         function showView(viewName) {
+            const targetView = document.getElementById(viewName + 'View');
+            const targetNav = document.querySelector(`.nav-item[data-view="${viewName}"]`);
+            if (!targetView || !targetNav) return;
+
+            if (currentUser && !puedeVerVista(viewName)) {
+                const vistaFallback = obtenerPrimeraVistaPermitida();
+                if (vistaFallback && vistaFallback !== viewName) {
+                    showView(vistaFallback);
+                }
+                return;
+            }
+
             // Ocultar todas las vistas
             document.querySelectorAll('.view').forEach(view => {
                 view.classList.remove('active');
             });
             
             // Mostrar la vista seleccionada
-            document.getElementById(viewName + 'View').classList.add('active');
+            targetView.classList.add('active');
             
             // Actualizar navegación
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
-            document.querySelector(`[data-view="${viewName}"]`).classList.add('active');
+            targetNav.classList.add('active');
             document.body.className = document.body.className.replace(/view-\w+/g, '').trim();
             document.body.classList.add(`view-${viewName}`);
             
@@ -3728,14 +3763,13 @@
             diaSeleccionado = dia;
             categoriaSeleccionada = 'desayuno';
             
-            // Actualizar tabs
-            document.querySelectorAll('.tab').forEach(tab => {
+            // Mantener sincronizados los dos selectores de día (menú y configuración)
+            document.querySelectorAll('button.tab[onclick*="seleccionarDia"]').forEach(tab => {
                 tab.classList.remove('active');
             });
-            const targetEl = (evtOrEl && evtOrEl.target) ? evtOrEl.target : evtOrEl;
-            if (targetEl && targetEl.classList) {
-                targetEl.classList.add('active');
-            }
+            document.querySelectorAll(`button.tab[onclick*="seleccionarDia('${dia}'"]`).forEach(tab => {
+                tab.classList.add('active');
+            });
             
             actualizarVistaDia(dia);
             seleccionarCategoriaMenu(categoriaSeleccionada);
@@ -3743,11 +3777,14 @@
         }
 
         function actualizarVistaDia(dia) {
-            const titulo = document.getElementById('tituloDia');
+            const tituloMenu = document.getElementById('tituloMenuDia');
+            const tituloAdmin = document.getElementById('tituloDia');
             const itemsDiv = document.getElementById('itemsMenuDia');
             const itemsAdminDiv = document.getElementById('itemsAdminDia');
+            const diaFormateado = dia.charAt(0).toUpperCase() + dia.slice(1);
             
-            if (titulo) titulo.textContent = `Configuración del Menú - ${dia.charAt(0).toUpperCase() + dia.slice(1)}`;
+            if (tituloMenu) tituloMenu.textContent = `Menú del día - ${diaFormateado}`;
+            if (tituloAdmin) tituloAdmin.textContent = `Configuración del Menú - ${diaFormateado}`;
             
             if (!itemsDiv && !itemsAdminDiv) return;
             

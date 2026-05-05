@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaranTe v6.21 - Sistema de GestiÃ³n de Restaurante</title>
+    <title>TaranTe v6.22 - Sistema de GestiÃ³n de Restaurante</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -11,7 +11,7 @@
     
     <!-- Firebase Configuration -->
     <script>
-        const APP_VERSION = '6.21';
+        const APP_VERSION = '6.22';
         const firebaseConfig = {
             apiKey: "AIzaSyAEB1xiIH_wUolK8NAJcklIfRV33QoBDuM",
             authDomain: "fenix-restaurant.firebaseapp.com",
@@ -4516,8 +4516,17 @@
                 login();
             }
         });
+    
+        // FunciÃ³n para ocultar el loader
+        function hideLoader() {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
+
 
 

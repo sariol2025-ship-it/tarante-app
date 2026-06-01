@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaranTe v6.22 - Sistema de GestiÃ³n de Restaurante</title>
+    <title>TaranTe v6.23 - Sistema de GestiÃ³n de Restaurante</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -11,7 +11,7 @@
     
     <!-- Firebase Configuration -->
     <script>
-        const APP_VERSION = '6.22';
+        const APP_VERSION = '6.23';
         const firebaseConfig = {
             apiKey: "AIzaSyAEB1xiIH_wUolK8NAJcklIfRV33QoBDuM",
             authDomain: "fenix-restaurant.firebaseapp.com",
@@ -801,6 +801,14 @@
                 <h2>ðŸ“Š Dashboard</h2>
                 <p>Sistema de gestiÃ³n de restaurante TaranTe</p>
             </div>
+
+            <div class="panel-section">
+                <h3>ðŸª‘ Estado de las Mesas</h3>
+                <div id="mesasGrid" class="mesas-container">
+                    <!-- Las mesas se generarÃ¡n dinÃ¡micamente -->
+                </div>
+            </div>
+        </div>
 
             <!-- ============ COMANDAS ============ -->
         <div id="comandasView" class="view">
@@ -4137,10 +4145,15 @@
         function actualizarDashboard() {
             const mesasActivas = mesas.filter(m => m.estado === 'activa').length;
             const pedidosEnCocina = pedidosCocina.filter(p => p.estado === 'pendiente').length;
-            
-            document.getElementById('totalMesasActivas').textContent = mesasActivas;
-            document.getElementById('totalPedidosCocina').textContent = pedidosEnCocina;
-            document.getElementById('totalVentas').textContent = `$${ventasHoy.toFixed(2)}`;
+
+            const totalMesasActivasEl = document.getElementById('totalMesasActivas');
+            const totalPedidosCocinaEl = document.getElementById('totalPedidosCocina');
+            const totalVentasEl = document.getElementById('totalVentas');
+
+            if (totalMesasActivasEl) totalMesasActivasEl.textContent = mesasActivas;
+            if (totalPedidosCocinaEl) totalPedidosCocinaEl.textContent = pedidosEnCocina;
+            if (totalVentasEl) totalVentasEl.textContent = `S/.${ventasHoy.toFixed(2)}`;
+
             addDebugLog(`ðŸ“Š Dashboard actualizado - Mesas activas: ${mesasActivas}, Pedidos en cocina: ${pedidosEnCocina}`);
             renderResumenMenuDia();
         }
@@ -4517,12 +4530,14 @@
             }
         });
     
-        // FunciÃ³n para ocultar el loader
         function hideLoader() {
             const loader = document.getElementById('loader');
-            if (loader) {
-                loader.style.display = 'none';
-            }
+            const loginContainer = document.getElementById('loginContainer');
+
+            setTimeout(() => {
+                if (loader) loader.style.display = 'none';
+                if (loginContainer) loginContainer.style.display = 'flex';
+            }, 300);
         }
     </script>
 </body>
